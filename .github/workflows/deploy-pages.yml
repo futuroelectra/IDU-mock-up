@@ -32,6 +32,12 @@ jobs:
       - name: Build static export
         run: npm run build
 
+      - name: Copy public assets to out
+        run: cp -r public/. out/
+
+      - name: List out directory
+        run: ls -la out/
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 

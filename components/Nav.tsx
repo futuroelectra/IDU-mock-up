@@ -9,24 +9,24 @@ const basePath = process.env.NODE_ENV === 'production' ? '/IDU-mock-up' : ''
 
 const menuGlowStyles: Record<string, { background: string; boxShadow: string }> = {
   Company: {
-    background: 'linear-gradient(135deg, rgba(251,191,36,0.15) 0%, rgba(245,158,11,0.08) 40%, transparent 70%)',
-    boxShadow: 'inset -40px 0 60px -20px rgba(251,191,36,0.12)',
+    background: 'linear-gradient(135deg, rgba(251,191,36,0.38) 0%, rgba(245,158,11,0.22) 40%, rgba(251,191,36,0.08) 100%)',
+    boxShadow: 'inset -40px 0 80px -20px rgba(251,191,36,0.35)',
   },
   'Knowledge Center': {
-    background: 'linear-gradient(135deg, rgba(59,130,246,0.12) 0%, rgba(99,102,241,0.06) 50%, transparent 100%)',
-    boxShadow: 'inset -40px 0 60px -20px rgba(59,130,246,0.1)',
+    background: 'linear-gradient(135deg, rgba(59,130,246,0.35) 0%, rgba(99,102,241,0.2) 50%, rgba(59,130,246,0.06) 100%)',
+    boxShadow: 'inset -40px 0 80px -20px rgba(59,130,246,0.3)',
   },
   'Global Success': {
-    background: 'linear-gradient(135deg, rgba(34,197,94,0.12) 0%, rgba(16,185,129,0.06) 50%, transparent 100%)',
-    boxShadow: 'inset -40px 0 60px -20px rgba(34,197,94,0.1)',
+    background: 'linear-gradient(135deg, rgba(34,197,94,0.35) 0%, rgba(16,185,129,0.2) 50%, rgba(34,197,94,0.06) 100%)',
+    boxShadow: 'inset -40px 0 80px -20px rgba(34,197,94,0.3)',
   },
   Platform: {
-    background: 'linear-gradient(135deg, rgba(168,85,247,0.14) 0%, rgba(139,92,246,0.07) 50%, transparent 100%)',
-    boxShadow: 'inset -40px 0 60px -20px rgba(168,85,247,0.12)',
+    background: 'linear-gradient(135deg, rgba(168,85,247,0.38) 0%, rgba(139,92,246,0.22) 50%, rgba(168,85,247,0.08) 100%)',
+    boxShadow: 'inset -40px 0 80px -20px rgba(168,85,247,0.35)',
   },
   Solutions: {
-    background: 'linear-gradient(135deg, rgba(6,182,212,0.12) 0%, rgba(14,165,233,0.06) 50%, transparent 100%)',
-    boxShadow: 'inset -40px 0 60px -20px rgba(6,182,212,0.1)',
+    background: 'linear-gradient(135deg, rgba(6,182,212,0.35) 0%, rgba(14,165,233,0.2) 50%, rgba(6,182,212,0.06) 100%)',
+    boxShadow: 'inset -40px 0 80px -20px rgba(6,182,212,0.3)',
   },
 }
 
@@ -55,11 +55,12 @@ export default function Nav() {
       <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between relative">
         <Link href="/" className="flex items-center shrink-0 z-10">
           <Image
-            src={`${basePath}/IDU%20NEW%20OPTION%2024.png`}
+            src={`${basePath}/idu-logo.png`}
             alt="IDU"
             width={120}
             height={49}
             className="h-8 w-auto"
+            unoptimized
           />
         </Link>
 
