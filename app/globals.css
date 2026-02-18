@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-panchang: 'Panchang', sans-serif;
+  --font-manrope: 'Manrope', sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-black text-white antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-panchang;
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 60px rgba(99, 102, 241, 0.3), 0 0 100px rgba(139, 92, 246, 0.15), inset 0 0 40px rgba(255, 255, 255, 0.02);
+    filter: brightness(1);
+  }
+  50% {
+    box-shadow: 0 0 90px rgba(99, 102, 241, 0.45), 0 0 140px rgba(139, 92, 246, 0.28), inset 0 0 60px rgba(255, 255, 255, 0.04);
+    filter: brightness(1.05);
+  }
+}
+
+@keyframes menu-glow-pulse {
+  0%, 100% {
+    opacity: 0.88;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 3.5s ease-in-out infinite;
+}
+
+.animate-menu-glow {
+  animation: menu-glow-pulse 2.5s ease-in-out infinite;
+}
