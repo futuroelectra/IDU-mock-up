@@ -5,6 +5,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { megaMenuData } from './navMenuData'
 
+const basePath = process.env.NODE_ENV === 'production' ? '/IDU-mock-up' : ''
+
 const menuGlowStyles: Record<string, { background: string; boxShadow: string }> = {
   Company: {
     background: 'linear-gradient(135deg, rgba(251,191,36,0.15) 0%, rgba(245,158,11,0.08) 40%, transparent 70%)',
@@ -53,7 +55,7 @@ export default function Nav() {
       <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between relative">
         <Link href="/" className="flex items-center shrink-0 z-10">
           <Image
-            src="/IDU%20NEW%20OPTION%2024.png"
+            src={`${basePath}/IDU%20NEW%20OPTION%2024.png`}
             alt="IDU"
             width={120}
             height={49}
