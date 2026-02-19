@@ -5,7 +5,7 @@ import WhiteSection from '@/components/WhiteSection'
 
 export default function Page2() {
   return (
-    <main className="min-h-screen bg-black">
+    <main className="min-h-screen" style={{ backgroundColor: '#0a0e27' }}>
       <Nav />
       <HeroSection headline="Precision-engineered financial intelligence." />
       <LiquidGlass />
