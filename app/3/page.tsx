@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import MarkupThreeNav from '@/components/MarkupThreeNav'
+import MockupThreeNav from '@/components/MockupThreeNav'
 import CursorNetworkPanel from '@/components/CursorNetworkPanel'
 import { megaMenuData } from '@/components/navMenuData'
 
@@ -59,7 +59,7 @@ const solutionsLinks = solutionsItem ? solutionsItem.groups.flatMap((group) => g
 export default function Page3() {
   return (
     <main className="min-h-screen overflow-x-hidden bg-white text-[#0f2f68]">
-      <MarkupThreeNav />
+      <MockupThreeNav />
 
       <section className="relative min-h-screen overflow-hidden bg-[#050221] pt-32 text-white sm:pt-36">
         <div

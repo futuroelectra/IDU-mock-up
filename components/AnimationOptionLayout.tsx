@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import MarkupThreeNav from './MarkupThreeNav'
+import MockupThreeNav from './MockupThreeNav'
 import { megaMenuData } from './navMenuData'
 
 const basePath = process.env.NODE_ENV === 'production' ? '/IDU-mock-up' : ''
@@ -330,7 +330,7 @@ export default function AnimationOptionLayout({
 }: AnimationOptionLayoutProps) {
   return (
     <main className="min-h-screen overflow-x-hidden bg-white text-[#0f2f68]">
-      <MarkupThreeNav />
+      <MockupThreeNav />
 
       <section className="relative min-h-screen overflow-hidden bg-[#050221] pt-32 text-white sm:pt-36">
         <div

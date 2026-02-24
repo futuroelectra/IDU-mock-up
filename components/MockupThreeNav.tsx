@@ -82,7 +82,7 @@ function ChevronDown({ open, lightMode }: { open: boolean; lightMode: boolean })
   )
 }
 
-export default function MarkupThreeNav() {
+export default function MockupThreeNav() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
   const [isHidden, setIsHidden] = useState(false)
   const [lightMode, setLightMode] = useState(false)
