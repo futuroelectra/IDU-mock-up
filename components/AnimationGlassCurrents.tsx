@@ -60,7 +60,7 @@ function GlassCurrentsScene() {
   const capsuleColors = useMemo(
     () =>
       capsules.map((capsule) =>
-        new THREE.Color().setHSL(0.58 + (capsule.seed % 3) * 0.01, 0.2, 0.86 + ((capsule.seed * 13) % 9) * 0.01)
+        new THREE.Color().setHSL(0.58 + (capsule.seed % 3) * 0.005, 0.06, 0.95 + ((capsule.seed * 13) % 9) * 0.004)
       ),
     [capsules]
   )
@@ -156,26 +156,26 @@ function GlassCurrentsScene() {
 
   return (
     <>
-      <ambientLight intensity={0.9} color="#eff6ff" />
-      <directionalLight position={[6, 5, 7]} intensity={1.2} color="#ffffff" />
-      <directionalLight position={[-5, -2, 4]} intensity={0.74} color="#d8e8ff" />
-      <pointLight position={[0, 0, 5]} intensity={0.45} color="#dce8ff" />
+      <ambientLight intensity={1.03} color="#ffffff" />
+      <directionalLight position={[6, 5, 7]} intensity={1.35} color="#ffffff" />
+      <directionalLight position={[-5, -2, 4]} intensity={0.82} color="#f3f8ff" />
+      <pointLight position={[0, 0, 5]} intensity={0.56} color="#ffffff" />
 
       <instancedMesh ref={meshRef} args={[undefined, undefined, CAPSULE_COUNT]}>
         <capsuleGeometry args={[1, 1.2, 18, 34]} />
         <meshPhysicalMaterial
           vertexColors
-          color="#eaf2ff"
-          roughness={0.16}
-          metalness={0.04}
-          transmission={0.22}
-          thickness={1.25}
+          color="#ffffff"
+          roughness={0.09}
+          metalness={0.02}
+          transmission={0.14}
+          thickness={1.18}
           ior={1.16}
           clearcoat={1}
-          clearcoatRoughness={0.08}
-          emissive="#90abd8"
-          emissiveIntensity={0.14}
-          iridescence={0.18}
+          clearcoatRoughness={0.05}
+          emissive="#d9e8ff"
+          emissiveIntensity={0.24}
+          iridescence={0.12}
           iridescenceIOR={1.12}
           iridescenceThicknessRange={[100, 300]}
           transparent
@@ -187,14 +187,15 @@ function GlassCurrentsScene() {
         <bufferGeometry>
           <bufferAttribute attach="attributes-position" count={starPositions.length / 3} array={starPositions} itemSize={3} />
         </bufferGeometry>
-        <pointsMaterial color="#f6faff" size={0.05} opacity={0.2} transparent depthWrite={false} sizeAttenuation />
+        <pointsMaterial color="#ffffff" size={0.05} opacity={0.25} transparent depthWrite={false} sizeAttenuation />
       </points>
     </>
   )
 }
 
 export default function AnimationGlassCurrents() {
-  const edgeMask = 'radial-gradient(122% 104% at 50% 50%, black 57%, transparent 100%)'
+  const edgeMask =
+    'radial-gradient(136% 124% at 50% 50%, rgba(0,0,0,1) 30%, rgba(0,0,0,0.93) 52%, rgba(0,0,0,0.6) 74%, rgba(0,0,0,0.16) 90%, rgba(0,0,0,0) 100%)'
 
   return (
     <div className="relative h-full w-full overflow-hidden" style={{ WebkitMaskImage: edgeMask, maskImage: edgeMask }}>

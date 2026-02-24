@@ -60,7 +60,7 @@ function LiquidGlassScene() {
   const orbColors = useMemo(
     () =>
       orbs.map((orb) =>
-        new THREE.Color().setHSL(0.58 + orb.layer * 0.02, 0.2 + orb.layer * 0.04, 0.88 + orb.layer * 0.08)
+        new THREE.Color().setHSL(0.58 + orb.layer * 0.01, 0.06 + orb.layer * 0.02, 0.95 + orb.layer * 0.03)
       ),
     [orbs]
   )
@@ -162,27 +162,27 @@ function LiquidGlassScene() {
 
   return (
     <>
-      <ambientLight intensity={0.95} color="#f2f7ff" />
-      <directionalLight position={[6, 6, 9]} intensity={1.35} color="#ffffff" />
-      <directionalLight position={[-5, -3, 4]} intensity={0.78} color="#d4e3ff" />
-      <pointLight position={[0, 0, 5]} intensity={0.5} color="#e9f2ff" />
+      <ambientLight intensity={1.05} color="#ffffff" />
+      <directionalLight position={[6, 6, 9]} intensity={1.45} color="#ffffff" />
+      <directionalLight position={[-5, -3, 4]} intensity={0.9} color="#f3f8ff" />
+      <pointLight position={[0, 0, 5]} intensity={0.6} color="#ffffff" />
 
       <instancedMesh ref={meshRef} args={[undefined, undefined, ORB_COUNT]}>
         <sphereGeometry args={[1, 52, 52]} />
         <meshPhysicalMaterial
           vertexColors
-          color="#edf4ff"
-          roughness={0.12}
-          metalness={0.03}
-          transmission={0.24}
-          thickness={1.2}
+          color="#ffffff"
+          roughness={0.08}
+          metalness={0.02}
+          transmission={0.14}
+          thickness={1.1}
           ior={1.14}
           clearcoat={1}
-          clearcoatRoughness={0.06}
-          sheen={0.65}
-          sheenColor="#f6fbff"
-          emissive="#95add8"
-          emissiveIntensity={0.16}
+          clearcoatRoughness={0.05}
+          sheen={0.8}
+          sheenColor="#ffffff"
+          emissive="#dbe8ff"
+          emissiveIntensity={0.24}
           transparent
           opacity={0.96}
         />
@@ -192,14 +192,15 @@ function LiquidGlassScene() {
         <bufferGeometry>
           <bufferAttribute attach="attributes-position" count={sparklePositions.length / 3} array={sparklePositions} itemSize={3} />
         </bufferGeometry>
-        <pointsMaterial color="#f8fbff" size={0.05} opacity={0.25} transparent depthWrite={false} sizeAttenuation />
+        <pointsMaterial color="#ffffff" size={0.05} opacity={0.3} transparent depthWrite={false} sizeAttenuation />
       </points>
     </>
   )
 }
 
 export default function AnimationLiquidGlassField() {
-  const edgeMask = 'radial-gradient(122% 104% at 50% 50%, black 57%, transparent 100%)'
+  const edgeMask =
+    'radial-gradient(136% 124% at 50% 50%, rgba(0,0,0,1) 30%, rgba(0,0,0,0.93) 52%, rgba(0,0,0,0.6) 74%, rgba(0,0,0,0.16) 90%, rgba(0,0,0,0) 100%)'
 
   return (
     <div className="relative h-full w-full overflow-hidden" style={{ WebkitMaskImage: edgeMask, maskImage: edgeMask }}>

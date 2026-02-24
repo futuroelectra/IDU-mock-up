@@ -48,7 +48,7 @@ function PearlPressureScene() {
   }, [])
 
   const pearlColors = useMemo(
-    () => pearls.map((pearl) => new THREE.Color().setHSL(0.58, 0.16 + (pearl.seed % 2) * 0.03, 0.88 + ((pearl.seed * 11) % 8) * 0.01)),
+    () => pearls.map((pearl) => new THREE.Color().setHSL(0.58, 0.05 + (pearl.seed % 2) * 0.015, 0.95 + ((pearl.seed * 11) % 8) * 0.004)),
     [pearls]
   )
 
@@ -139,27 +139,27 @@ function PearlPressureScene() {
 
   return (
     <>
-      <ambientLight intensity={0.95} color="#f2f7ff" />
-      <directionalLight position={[6, 6, 8]} intensity={1.28} color="#ffffff" />
-      <directionalLight position={[-6, -2, 4]} intensity={0.74} color="#d5e5ff" />
-      <pointLight position={[0, 0, 4]} intensity={0.46} color="#dce8ff" />
+      <ambientLight intensity={1.05} color="#ffffff" />
+      <directionalLight position={[6, 6, 8]} intensity={1.4} color="#ffffff" />
+      <directionalLight position={[-6, -2, 4]} intensity={0.84} color="#f3f8ff" />
+      <pointLight position={[0, 0, 4]} intensity={0.58} color="#ffffff" />
 
       <instancedMesh ref={pearlsRef} args={[undefined, undefined, PEARL_COUNT]}>
         <sphereGeometry args={[1, 52, 52]} />
         <meshPhysicalMaterial
           vertexColors
-          color="#edf4ff"
-          roughness={0.18}
+          color="#ffffff"
+          roughness={0.09}
           metalness={0.02}
-          transmission={0.18}
-          thickness={1.08}
+          transmission={0.12}
+          thickness={1.02}
           ior={1.14}
           clearcoat={1}
-          clearcoatRoughness={0.09}
-          sheen={0.58}
-          sheenColor="#f8fbff"
-          emissive="#8ca8d7"
-          emissiveIntensity={0.13}
+          clearcoatRoughness={0.05}
+          sheen={0.72}
+          sheenColor="#ffffff"
+          emissive="#d8e6ff"
+          emissiveIntensity={0.24}
           transparent
           opacity={0.96}
         />
@@ -169,14 +169,15 @@ function PearlPressureScene() {
         <bufferGeometry>
           <bufferAttribute attach="attributes-position" count={grainPositions.length / 3} array={grainPositions} itemSize={3} />
         </bufferGeometry>
-        <pointsMaterial color="#f8fbff" size={0.05} opacity={0.16} transparent depthWrite={false} sizeAttenuation />
+        <pointsMaterial color="#ffffff" size={0.05} opacity={0.22} transparent depthWrite={false} sizeAttenuation />
       </points>
     </>
   )
 }
 
 export default function AnimationPearlPressureField() {
-  const edgeMask = 'radial-gradient(122% 104% at 50% 50%, black 57%, transparent 100%)'
+  const edgeMask =
+    'radial-gradient(136% 124% at 50% 50%, rgba(0,0,0,1) 30%, rgba(0,0,0,0.93) 52%, rgba(0,0,0,0.6) 74%, rgba(0,0,0,0.16) 90%, rgba(0,0,0,0) 100%)'
 
   return (
     <div className="relative h-full w-full overflow-hidden" style={{ WebkitMaskImage: edgeMask, maskImage: edgeMask }}>
