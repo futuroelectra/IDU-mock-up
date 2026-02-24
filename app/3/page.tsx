@@ -61,7 +61,7 @@ export default function Page3() {
     <main className="min-h-screen overflow-x-hidden bg-white text-[#0f2f68]">
       <MarkupThreeNav />
 
-      <section className="relative overflow-hidden bg-[#050221] pb-44 pt-36 text-white sm:pb-52 sm:pt-40">
+      <section className="relative min-h-screen overflow-hidden bg-[#050221] pt-32 text-white sm:pt-36">
         <div
           className="pointer-events-none absolute inset-0"
           style={{
@@ -70,7 +70,7 @@ export default function Page3() {
           }}
         />
 
-        <div className="relative mx-auto grid max-w-[94rem] items-center gap-14 px-6 sm:px-8 lg:grid-cols-[1.2fr_0.96fr] xl:px-10">
+        <div className="relative mx-auto grid min-h-[calc(100vh-9.5rem)] max-w-[94rem] items-center gap-14 px-6 pb-16 sm:px-8 sm:pb-20 lg:grid-cols-[1.2fr_0.96fr] xl:px-10">
           <div className="h-[340px] w-full sm:h-[440px] lg:h-[520px]">
             <CursorNetworkPanel />
           </div>
@@ -125,15 +125,15 @@ export default function Page3() {
         </div>
 
         <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-44"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-56 sm:h-64"
           style={{
             background:
-              'linear-gradient(180deg, rgba(7,2,45,0) 0%, rgba(15,31,79,0.44) 42%, rgba(180,203,240,0.46) 72%, rgba(255,255,255,1) 100%)',
+              'radial-gradient(140% 120% at 50% 0%, rgba(128,168,236,0.22) 0%, rgba(128,168,236,0) 58%), linear-gradient(180deg, rgba(7,2,45,0) 0%, rgba(13,26,66,0.62) 46%, rgba(163,191,236,0.6) 74%, rgba(255,255,255,1) 100%)',
           }}
         />
       </section>
 
-      <section id="nav-light-start" className="bg-white px-6 pb-24 pt-10 sm:px-8 xl:px-10">
+      <section id="nav-light-start" className="bg-white px-6 pb-24 pt-4 sm:px-8 xl:px-10">
         <div className="mx-auto max-w-[94rem] rounded-[2.1rem] border border-[#d7e4fb] bg-gradient-to-r from-white via-[#f8fbff] to-[#f6faff] p-8 shadow-[0_34px_70px_-56px_rgba(28,76,152,0.45)] sm:p-10">
           <div className="grid gap-8 lg:grid-cols-[1.06fr_1fr] lg:items-end">
             <div>

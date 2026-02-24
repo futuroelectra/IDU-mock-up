@@ -188,6 +188,30 @@ export default function CursorNetworkPanel() {
         context.fill()
       }
 
+      const edgeFade = clamp(Math.min(width, height) * 0.2, 56, 140)
+      const edgePctX = edgeFade / width
+      const edgePctY = edgeFade / height
+
+      context.globalCompositeOperation = 'destination-in'
+
+      const horizontalFade = context.createLinearGradient(0, 0, width, 0)
+      horizontalFade.addColorStop(0, 'rgba(0,0,0,0)')
+      horizontalFade.addColorStop(edgePctX, 'rgba(0,0,0,1)')
+      horizontalFade.addColorStop(1 - edgePctX, 'rgba(0,0,0,1)')
+      horizontalFade.addColorStop(1, 'rgba(0,0,0,0)')
+      context.fillStyle = horizontalFade
+      context.fillRect(0, 0, width, height)
+
+      const verticalFade = context.createLinearGradient(0, 0, 0, height)
+      verticalFade.addColorStop(0, 'rgba(0,0,0,0)')
+      verticalFade.addColorStop(edgePctY, 'rgba(0,0,0,1)')
+      verticalFade.addColorStop(1 - edgePctY, 'rgba(0,0,0,1)')
+      verticalFade.addColorStop(1, 'rgba(0,0,0,0)')
+      context.fillStyle = verticalFade
+      context.fillRect(0, 0, width, height)
+
+      context.globalCompositeOperation = 'source-over'
+
     }
 
     resize()
