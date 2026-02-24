@@ -66,7 +66,7 @@ export default function AnimationOptionLayout({
               </a>
               <a
                 href="#"
-                className="inline-flex items-center gap-2 rounded-xl border border-white/28 bg-white/10 px-5 py-3 text-sm font-medium text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/18"
+                className="inline-flex items-center gap-2 rounded-xl border border-[#4f6692] bg-[#31466e] px-5 py-3 text-sm font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#283d64]"
               >
                 Explore IDU
               </a>

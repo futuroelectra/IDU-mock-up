@@ -133,8 +133,8 @@ export default function AnimationDepartmentFlows() {
       const targetY = pointer.active ? pointer.y : idleY
       const lastX = pointer.smoothX
       const lastY = pointer.smoothY
-      pointer.smoothX += (targetX - pointer.smoothX) * 0.105
-      pointer.smoothY += (targetY - pointer.smoothY) * 0.105
+      pointer.smoothX += (targetX - pointer.smoothX) * 0.07
+      pointer.smoothY += (targetY - pointer.smoothY) * 0.07
       pointer.vx = pointer.smoothX - lastX
       pointer.vy = pointer.smoothY - lastY
       const pointerSpeed = Math.hypot(pointer.vx, pointer.vy)
@@ -144,9 +144,9 @@ export default function AnimationDepartmentFlows() {
         for (let i = 0; i <= 84; i += 1) {
           const t = i / 84
           const point = lanePoint(lane, t, time)
-          const influence = clamp(1 - Math.hypot(point.x - pointer.smoothX, point.y - pointer.smoothY) / 280, 0, 1)
-          const warp = influence * (20 + pointerSpeed * 80)
-          const warpedY = point.y + Math.sin((t + time * 0.2 + lane.phase) * Math.PI * 6) * warp * 0.26
+          const influence = clamp(1 - Math.hypot(point.x - pointer.smoothX, point.y - pointer.smoothY) / 220, 0, 1)
+          const warp = influence * (7 + pointerSpeed * 22)
+          const warpedY = point.y + Math.sin((t + time * 0.2 + lane.phase) * Math.PI * 6) * warp * 0.2
           if (i === 0) {
             context.moveTo(point.x, warpedY)
           } else {
@@ -175,19 +175,19 @@ export default function AnimationDepartmentFlows() {
         const dx = pointer.smoothX - px
         const dy = pointer.smoothY - py
         const distance = Math.hypot(dx, dy)
-        const influence = clamp(1 - distance / 220, 0, 1)
+        const influence = clamp(1 - distance / 185, 0, 1)
         if (influence > 0) {
-          const attract = (0.2 + pointerSpeed * 2.6) * influence
-          particle.vx += dx * attract * 0.0105
-          particle.vy += dy * attract * 0.0105
+          const attract = (0.07 + pointerSpeed * 0.55) * influence
+          particle.vx += dx * attract * 0.0062
+          particle.vy += dy * attract * 0.0062
 
-          const swirl = (0.36 + pointerSpeed * 4.2) * influence * 0.014
-          particle.vx += -dy * swirl * 0.016
-          particle.vy += dx * swirl * 0.016
+          const swirl = (0.12 + pointerSpeed * 0.9) * influence * 0.007
+          particle.vx += -dy * swirl * 0.008
+          particle.vy += dx * swirl * 0.008
         }
 
-        if (distance < 115) {
-          const repel = (1 - distance / 115) * (1.0 + particle.size * 0.1)
+        if (distance < 90) {
+          const repel = (1 - distance / 90) * (0.34 + particle.size * 0.04)
           const inv = 1 / (distance + 0.0001)
           particle.vx -= dx * inv * repel
           particle.vy -= dy * inv * repel

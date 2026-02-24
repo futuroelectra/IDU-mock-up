@@ -179,16 +179,16 @@ export default function AnimationPlanningMatrix() {
       const targetY = pointer.active ? pointer.y : idleY
       const lastX = pointer.smoothX
       const lastY = pointer.smoothY
-      pointer.smoothX += (targetX - pointer.smoothX) * 0.1
-      pointer.smoothY += (targetY - pointer.smoothY) * 0.1
+      pointer.smoothX += (targetX - pointer.smoothX) * 0.07
+      pointer.smoothY += (targetY - pointer.smoothY) * 0.07
       pointer.vx = pointer.smoothX - lastX
       pointer.vy = pointer.smoothY - lastY
       const pointerSpeed = Math.hypot(pointer.vx, pointer.vy)
 
       cells.forEach((cell) => {
         cell.energy *= 0.9
-        const influence = clamp(1 - Math.hypot(cell.x - pointer.smoothX, cell.y - pointer.smoothY) / 210, 0, 1)
-        cell.energy += influence * 0.11
+        const influence = clamp(1 - Math.hypot(cell.x - pointer.smoothX, cell.y - pointer.smoothY) / 185, 0, 1)
+        cell.energy += influence * 0.045
       })
 
       routes.forEach((route) => {
@@ -208,7 +208,7 @@ export default function AnimationPlanningMatrix() {
 
       pulses.forEach((pulse) => {
         const route = routes[pulse.routeIndex]
-        pulse.progress += pulse.speed * (1 + pointerSpeed * 0.6)
+        pulse.progress += pulse.speed * (1 + pointerSpeed * 0.22)
         if (pulse.progress > 1) {
           pulse.progress = 0
           pulse.segment += 1
@@ -227,8 +227,8 @@ export default function AnimationPlanningMatrix() {
         const dx = pointer.smoothX - x
         const dy = pointer.smoothY - y
         const dist = Math.hypot(dx, dy)
-        const influence = clamp(1 - dist / 170, 0, 1)
-        const size = pulse.size * (1 + influence * 0.45)
+        const influence = clamp(1 - dist / 145, 0, 1)
+        const size = pulse.size * (1 + influence * 0.18)
 
         context.beginPath()
         context.fillStyle = `rgba(255,255,255,${0.72 + influence * 0.2})`
@@ -237,8 +237,8 @@ export default function AnimationPlanningMatrix() {
 
         cells.forEach((cell) => {
           const d = Math.hypot(cell.x - x, cell.y - y)
-          if (d < 72) {
-            cell.energy += (1 - d / 72) * 0.25
+          if (d < 62) {
+            cell.energy += (1 - d / 62) * 0.11
           }
         })
       })
@@ -248,10 +248,10 @@ export default function AnimationPlanningMatrix() {
         const dx = pointer.smoothX - cell.x
         const dy = pointer.smoothY - cell.y
         const dist = Math.hypot(dx, dy)
-        const pull = clamp(1 - dist / 220, 0, 1)
-        const shiftX = dx * pull * 0.08
-        const shiftY = dy * pull * 0.08
-        const scale = 1 + energy * 0.12
+        const pull = clamp(1 - dist / 190, 0, 1)
+        const shiftX = dx * pull * 0.03
+        const shiftY = dy * pull * 0.03
+        const scale = 1 + energy * 0.055
         const w = cell.w * scale
         const h = cell.h * scale
         const x = cell.x - w / 2 + shiftX
