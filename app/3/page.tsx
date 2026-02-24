@@ -124,16 +124,19 @@ export default function Page3() {
           </div>
         </div>
 
+      </section>
+
+      <section className="relative h-[38vh] min-h-[230px] overflow-hidden bg-[#050221]">
         <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-56 sm:h-64"
+          className="pointer-events-none absolute inset-0"
           style={{
             background:
-              'radial-gradient(140% 120% at 50% 0%, rgba(128,168,236,0.22) 0%, rgba(128,168,236,0) 58%), linear-gradient(180deg, rgba(7,2,45,0) 0%, rgba(13,26,66,0.62) 46%, rgba(163,191,236,0.6) 74%, rgba(255,255,255,1) 100%)',
+              'radial-gradient(140% 120% at 50% -4%, rgba(126,169,238,0.32) 0%, rgba(126,169,238,0) 52%), linear-gradient(180deg, rgba(5,2,33,1) 0%, rgba(14,31,77,0.72) 42%, rgba(177,201,239,0.58) 72%, rgba(255,255,255,1) 100%)',
           }}
         />
       </section>
 
-      <section id="nav-light-start" className="bg-white px-6 pb-24 pt-4 sm:px-8 xl:px-10">
+      <section id="nav-light-start" className="bg-white px-6 pb-24 pt-0 sm:px-8 xl:px-10">
         <div className="mx-auto max-w-[94rem] rounded-[2.1rem] border border-[#d7e4fb] bg-gradient-to-r from-white via-[#f8fbff] to-[#f6faff] p-8 shadow-[0_34px_70px_-56px_rgba(28,76,152,0.45)] sm:p-10">
           <div className="grid gap-8 lg:grid-cols-[1.06fr_1fr] lg:items-end">
             <div>

@@ -21,10 +21,10 @@ const createNodes = (width: number, height: number, count: number): Node[] =>
     return {
       x: Math.random() * width,
       y: Math.random() * height,
-      vx: (Math.random() - 0.5) * (0.28 + depth * 0.34),
-      vy: (Math.random() - 0.5) * (0.24 + depth * 0.4),
+      vx: (Math.random() - 0.5) * (0.16 + depth * 0.18),
+      vy: (Math.random() - 0.5) * (0.14 + depth * 0.2),
       depth,
-      radius: 2.4 + depth * 8.4,
+      radius: 4.8 + depth * 13.2,
       phase: Math.random() * Math.PI * 2,
       drift: 0.35 + Math.random() * 0.9,
     }
@@ -57,6 +57,8 @@ export default function CursorNetworkPanel() {
       y: 0,
       smoothX: 0,
       smoothY: 0,
+      vx: 0,
+      vy: 0,
     }
 
     const resize = () => {
@@ -71,13 +73,15 @@ export default function CursorNetworkPanel() {
       canvas.style.height = `${height}px`
       context.setTransform(dpr, 0, 0, dpr, 0, 0)
 
-      const nodeCount = clamp(Math.round((width * height) / 9300), 56, 120)
+      const nodeCount = clamp(Math.round((width * height) / 25000), 20, 44)
       nodes = createNodes(width, height, nodeCount)
 
       pointer.x = width * 0.62
       pointer.y = height * 0.44
       pointer.smoothX = pointer.x
       pointer.smoothY = pointer.y
+      pointer.vx = 0
+      pointer.vy = 0
     }
 
     const handlePointerMove = (event: PointerEvent) => {
@@ -105,26 +109,42 @@ export default function CursorNetworkPanel() {
       const idleY = height * 0.5 + Math.sin(time * 0.52) * height * 0.08
       const targetX = pointer.active ? pointer.x : idleX
       const targetY = pointer.active ? pointer.y : idleY
-      pointer.smoothX += (targetX - pointer.smoothX) * 0.07
-      pointer.smoothY += (targetY - pointer.smoothY) * 0.07
+      const previousX = pointer.smoothX
+      const previousY = pointer.smoothY
+      pointer.smoothX += (targetX - pointer.smoothX) * 0.1
+      pointer.smoothY += (targetY - pointer.smoothY) * 0.1
+      pointer.vx = pointer.smoothX - previousX
+      pointer.vy = pointer.smoothY - previousY
 
-      const maxDistance = clamp(width * 0.2, 92, 148)
+      const maxDistance = clamp(width * 0.3, 120, 220)
+      const pointerSpeed = Math.hypot(pointer.vx, pointer.vy)
 
       for (let i = 0; i < nodes.length; i += 1) {
         const node = nodes[i]
-        const streamDriftX = Math.cos(time * node.drift + node.phase) * 0.2
-        const streamDriftY = Math.sin(time * (node.drift + 0.2) + node.phase) * 0.22
+        const streamDriftX = Math.cos(time * node.drift + node.phase) * 0.13
+        const streamDriftY = Math.sin(time * (node.drift + 0.2) + node.phase) * 0.15
         node.x += node.vx + streamDriftX
         node.y += node.vy + streamDriftY
 
         const dx = pointer.smoothX - node.x
         const dy = pointer.smoothY - node.y
         const pointerDistance = Math.hypot(dx, dy)
-        const influence = clamp(1 - pointerDistance / 250, 0, 1)
+        const influence = clamp(1 - pointerDistance / 300, 0, 1)
         if (influence > 0) {
-          const tension = (node.depth * 0.0034 + 0.0018) * influence
+          const tension = (node.depth * 0.007 + 0.0032) * influence
           node.x += dx * tension
           node.y += dy * tension
+
+          const swirl = (0.45 + pointerSpeed * 2.6) * influence * (0.0024 + node.depth * 0.002)
+          node.x += -dy * swirl
+          node.y += dx * swirl
+        }
+
+        if (pointerDistance < 150) {
+          const repel = (1 - pointerDistance / 150) * (1.6 + node.depth * 1.7)
+          const invDistance = 1 / (pointerDistance + 0.0001)
+          node.x -= dx * invDistance * repel
+          node.y -= dy * invDistance * repel
         }
 
         if (node.x < -40) node.x = width + 40
@@ -145,10 +165,10 @@ export default function CursorNetworkPanel() {
           }
 
           const strength = 1 - distance / maxDistance
-          const alpha = (0.08 + ((a.depth + b.depth) * 0.5) * 0.14) * strength
+          const alpha = (0.05 + ((a.depth + b.depth) * 0.5) * 0.1) * strength
           context.beginPath()
           context.strokeStyle = `rgba(241, 245, 252, ${alpha})`
-          context.lineWidth = 0.7 + strength * 1.25
+          context.lineWidth = 0.7 + strength * 1.1
           context.moveTo(a.x, a.y)
           context.lineTo(b.x, b.y)
           context.stroke()
