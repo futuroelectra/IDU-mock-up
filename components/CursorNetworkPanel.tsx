@@ -111,9 +111,9 @@ export default function CursorNetworkPanel() {
         pointer.smoothY,
         Math.max(width, height) * 0.58
       )
-      aura.addColorStop(0, 'rgba(0, 170, 255, 0.22)')
-      aura.addColorStop(0.34, 'rgba(0, 140, 255, 0.09)')
-      aura.addColorStop(1, 'rgba(0, 55, 120, 0)')
+      aura.addColorStop(0, 'rgba(62, 205, 255, 0.16)')
+      aura.addColorStop(0.38, 'rgba(35, 142, 255, 0.07)')
+      aura.addColorStop(1, 'rgba(0, 52, 133, 0)')
       context.fillStyle = aura
       context.fillRect(0, 0, width, height)
 
@@ -164,7 +164,7 @@ export default function CursorNetworkPanel() {
           const energyBoost = Math.max(nodeA.energy, nodeB.energy) * 0.5
           const alpha = strength * (0.2 + sparkle * 0.3 + energyBoost)
 
-          context.strokeStyle = `rgba(103, 194, 255, ${alpha})`
+          context.strokeStyle = `rgba(127, 212, 255, ${alpha})`
           context.lineWidth = 0.8 + strength * 1.2
           context.beginPath()
           context.moveTo(nodeA.x, nodeA.y)
@@ -181,7 +181,7 @@ export default function CursorNetworkPanel() {
         }
 
         const alpha = clamp(1 - distanceToPointer / 170, 0, 1) * 0.55
-        context.strokeStyle = `rgba(167, 228, 255, ${alpha})`
+        context.strokeStyle = `rgba(183, 236, 255, ${alpha})`
         context.lineWidth = 1
         context.beginPath()
         context.moveTo(pointer.smoothX, pointer.smoothY)
@@ -193,19 +193,19 @@ export default function CursorNetworkPanel() {
         const node = nodes[i]
         const glow = node.radius + node.energy * 1.6
         context.beginPath()
-        context.fillStyle = `rgba(198, 243, 255, ${0.5 + node.energy * 0.4})`
+        context.fillStyle = `rgba(202, 241, 255, ${0.42 + node.energy * 0.44})`
         context.arc(node.x, node.y, glow, 0, Math.PI * 2)
         context.fill()
       }
 
       context.beginPath()
-      context.strokeStyle = 'rgba(222, 247, 255, 0.65)'
+      context.strokeStyle = 'rgba(230, 249, 255, 0.52)'
       context.lineWidth = 1.4
       context.arc(pointer.smoothX, pointer.smoothY, 16, 0, Math.PI * 2)
       context.stroke()
 
       context.beginPath()
-      context.fillStyle = 'rgba(238, 252, 255, 0.85)'
+      context.fillStyle = 'rgba(238, 252, 255, 0.76)'
       context.arc(pointer.smoothX, pointer.smoothY, 3.8, 0, Math.PI * 2)
       context.fill()
     }
@@ -232,10 +232,10 @@ export default function CursorNetworkPanel() {
   return (
     <div
       ref={wrapperRef}
-      className="relative h-full w-full overflow-hidden rounded-[1.6rem] border border-cyan-200/25 bg-[#031034]"
+      className="relative h-full w-full overflow-hidden"
       style={{
-        boxShadow:
-          '0 36px 100px -64px rgba(77,170,255,1), inset 0 1px 0 rgba(255,255,255,0.38), inset 0 -60px 120px -80px rgba(3, 177, 255, 0.75)',
+        maskImage:
+          'radial-gradient(110% 90% at 50% 54%, rgba(0,0,0,1) 56%, rgba(0,0,0,0.32) 82%, transparent 100%)',
       }}
     >
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
@@ -243,14 +243,9 @@ export default function CursorNetworkPanel() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            'radial-gradient(circle at 12% 8%, rgba(188,241,255,0.24) 0%, rgba(188,241,255,0) 42%), linear-gradient(150deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 40%)',
+            'radial-gradient(circle at 16% 16%, rgba(188,241,255,0.12) 0%, rgba(188,241,255,0) 42%), linear-gradient(150deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0) 40%)',
         }}
       />
-      <div className="pointer-events-none absolute inset-x-8 bottom-7">
-        <div className="inline-flex items-center rounded-full border border-white/30 bg-white/15 px-4 py-2 text-xs text-white/90 backdrop-blur-lg">
-          Cursor-reactive network
-        </div>
-      </div>
     </div>
   )
 }
