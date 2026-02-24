@@ -21,7 +21,7 @@ type RibbonParticle = {
 }
 
 const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value))
-const CURSOR_FORCE = 0.1
+const CURSOR_FORCE = 0.2
 
 function makeLanes(): Lane[] {
   return [

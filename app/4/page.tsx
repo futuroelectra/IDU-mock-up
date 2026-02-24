@@ -9,6 +9,7 @@ export default function Page4() {
       conceptCopy="This concept visualizes different departments as living planning streams. Cursor interaction bends, combines, and accelerates these streams to reflect how non-financial managers can enter the same process without friction, while finance still keeps structure."
       animation={<AnimationDepartmentFlows />}
       swapSides
+      variant="flow"
     />
   )
 }

@@ -133,6 +133,12 @@ onMouseEnter={() => setOpenIndex(megaMenuData.length - 1 - index)}
             Markup 3
           </Link>
           <Link
+            href="/8"
+            className="hidden shrink-0 rounded-lg border border-white/20 bg-white/5 px-4 py-2.5 text-sm font-medium text-white/90 transition hover:bg-white/10 hover:text-white sm:inline-flex"
+          >
+            Markup 8
+          </Link>
+          <Link
             href="#"
             className="shrink-0 rounded-lg bg-white px-5 py-2.5 text-sm font-medium text-black transition hover:bg-white/90"
           >
