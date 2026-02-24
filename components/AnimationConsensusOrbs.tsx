@@ -128,8 +128,8 @@ export default function AnimationConsensusOrbs() {
       const targetY = pointer.active ? pointer.y : idleY
       const lastX = pointer.smoothX
       const lastY = pointer.smoothY
-      pointer.smoothX += (targetX - pointer.smoothX) * 0.11
-      pointer.smoothY += (targetY - pointer.smoothY) * 0.11
+      pointer.smoothX += (targetX - pointer.smoothX) * 0.095
+      pointer.smoothY += (targetY - pointer.smoothY) * 0.095
       pointer.vx = pointer.smoothX - lastX
       pointer.vy = pointer.smoothY - lastY
       const pointerSpeed = Math.hypot(pointer.vx, pointer.vy)
@@ -143,7 +143,7 @@ export default function AnimationConsensusOrbs() {
           const dist = Math.hypot(dx, dy)
           const minDist = (a.rx + b.rx) * 0.9
           if (dist < minDist) {
-            const push = (minDist - dist) * 0.014
+            const push = (minDist - dist) * 0.01
             const nx = dx / (dist + 0.0001)
             const ny = dy / (dist + 0.0001)
             a.vx += nx * push
@@ -163,19 +163,19 @@ export default function AnimationConsensusOrbs() {
         const dx = orb.x - pointer.smoothX
         const dy = orb.y - pointer.smoothY
         const dist = Math.hypot(dx, dy)
-        const influence = clamp(1 - dist / 260, 0, 1)
+        const influence = clamp(1 - dist / 240, 0, 1)
         if (influence > 0) {
-          const swirl = (0.14 + pointerSpeed * 3.4) * influence
-          orb.vx += -dy * swirl * 0.01
-          orb.vy += dx * swirl * 0.01
+          const swirl = (0.09 + pointerSpeed * 2.1) * influence
+          orb.vx += -dy * swirl * 0.008
+          orb.vy += dx * swirl * 0.008
 
-          const pull = (0.18 + pointerSpeed * 2.8) * influence
-          orb.vx += (pointer.smoothX - orb.x) * pull * 0.006
-          orb.vy += (pointer.smoothY - orb.y) * pull * 0.006
+          const pull = (0.11 + pointerSpeed * 1.8) * influence
+          orb.vx += (pointer.smoothX - orb.x) * pull * 0.0046
+          orb.vy += (pointer.smoothY - orb.y) * pull * 0.0046
         }
 
-        if (dist < 150) {
-          const repel = (1 - dist / 150) * (0.85 + pointerSpeed * 1.6)
+        if (dist < 140) {
+          const repel = (1 - dist / 140) * (0.58 + pointerSpeed * 1.0)
           const inv = 1 / (dist + 0.0001)
           orb.vx += dx * inv * repel
           orb.vy += dy * inv * repel

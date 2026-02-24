@@ -120,6 +120,18 @@ export default function AnimationOptionLayout({
             >
               Open Markup 5
             </Link>
+            <Link
+              href="/6"
+              className="rounded-full border border-[#d4e4ff] bg-white px-4 py-2 text-sm text-[#224a87] transition-colors hover:border-[#abc8f8] hover:text-[#12366f]"
+            >
+              Open Markup 6
+            </Link>
+            <Link
+              href="/7"
+              className="rounded-full border border-[#d4e4ff] bg-white px-4 py-2 text-sm text-[#224a87] transition-colors hover:border-[#abc8f8] hover:text-[#12366f]"
+            >
+              Open Markup 7
+            </Link>
           </div>
         </div>
       </section>

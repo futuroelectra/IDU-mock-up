@@ -111,8 +111,8 @@ export default function CursorNetworkPanel() {
       const targetY = pointer.active ? pointer.y : idleY
       const previousX = pointer.smoothX
       const previousY = pointer.smoothY
-      pointer.smoothX += (targetX - pointer.smoothX) * 0.1
-      pointer.smoothY += (targetY - pointer.smoothY) * 0.1
+      pointer.smoothX += (targetX - pointer.smoothX) * 0.085
+      pointer.smoothY += (targetY - pointer.smoothY) * 0.085
       pointer.vx = pointer.smoothX - previousX
       pointer.vy = pointer.smoothY - previousY
 
@@ -129,19 +129,19 @@ export default function CursorNetworkPanel() {
         const dx = pointer.smoothX - node.x
         const dy = pointer.smoothY - node.y
         const pointerDistance = Math.hypot(dx, dy)
-        const influence = clamp(1 - pointerDistance / 300, 0, 1)
+        const influence = clamp(1 - pointerDistance / 270, 0, 1)
         if (influence > 0) {
-          const tension = (node.depth * 0.007 + 0.0032) * influence
+          const tension = (node.depth * 0.0052 + 0.0024) * influence
           node.x += dx * tension
           node.y += dy * tension
 
-          const swirl = (0.45 + pointerSpeed * 2.6) * influence * (0.0024 + node.depth * 0.002)
+          const swirl = (0.3 + pointerSpeed * 1.8) * influence * (0.0016 + node.depth * 0.0014)
           node.x += -dy * swirl
           node.y += dx * swirl
         }
 
-        if (pointerDistance < 150) {
-          const repel = (1 - pointerDistance / 150) * (1.6 + node.depth * 1.7)
+        if (pointerDistance < 130) {
+          const repel = (1 - pointerDistance / 130) * (1.0 + node.depth * 1.1)
           const invDistance = 1 / (pointerDistance + 0.0001)
           node.x -= dx * invDistance * repel
           node.y -= dy * invDistance * repel
