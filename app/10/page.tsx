@@ -8,7 +8,7 @@ export default function Page10() {
       conceptTitle="A tactile matrix of premium forms that respond like a living planning surface."
       conceptCopy="This direction uses fewer, larger pearl forms in a controlled pressure field. The cursor creates focused displacement and recovery, presenting enterprise planning as calm, crafted, and deeply interactive instead of noisy or generic."
       animation={<AnimationPearlPressureField />}
-      variant="orbs"
+      postHeroTemplate="commandCenter"
     />
   )
 }

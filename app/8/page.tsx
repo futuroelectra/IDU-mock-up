@@ -9,7 +9,7 @@ export default function Page8() {
       conceptCopy="This direction moves beyond common node visuals into a premium liquid-glass system. Cursor pressure compresses and displaces floating objects across a shared membrane to represent collaborative planning forces that stay elegant, controlled, and finance-led."
       animation={<AnimationLiquidGlassField />}
       swapSides
-      variant="liquid"
+      postHeroTemplate="benchmarkSplit"
     />
   )
 }

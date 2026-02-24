@@ -9,7 +9,7 @@ export default function Page6() {
       conceptCopy="This concept treats planning inputs like moving allocations in orbital tracks. Cursor movement bends orbital centers and reweights flow, expressing how finance can absorb changing business priorities while staying coherent."
       animation={<AnimationLedgerRings />}
       swapSides
-      variant="rings"
+      postHeroTemplate="workflowBoard"
     />
   )
 }

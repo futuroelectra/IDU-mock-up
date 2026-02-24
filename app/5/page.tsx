@@ -8,7 +8,7 @@ export default function Page5() {
       conceptTitle="Larger adaptive objects that rebalance around user intent."
       conceptCopy="This direction uses fewer, larger planning objects to represent teams, priorities, and budgets finding equilibrium. Cursor movement creates strong push, pull, and swirl responses so the experience feels deliberate, premium, and less like a generic network graph."
       animation={<AnimationConsensusOrbs />}
-      variant="orbs"
+      postHeroTemplate="alternatingShowcase"
     />
   )
 }

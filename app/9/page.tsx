@@ -9,7 +9,7 @@ export default function Page9() {
       conceptCopy="This concept trades node-graphs for elegant glass currents that feel deliberate and premium. Cursor movement steers the field like pressure on a fluid stream, expressing cross-functional planning alignment without visual clutter."
       animation={<AnimationGlassCurrents />}
       swapSides
-      variant="liquid"
+      postHeroTemplate="storyPanels"
     />
   )
 }
