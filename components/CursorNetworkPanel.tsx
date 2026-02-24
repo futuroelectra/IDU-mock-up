@@ -50,7 +50,6 @@ export default function CursorNetworkPanel() {
     let height = 0
     let animationFrame = 0
     let nodes: Node[] = []
-    let grainPattern: CanvasPattern | null = null
 
     const pointer = {
       active: false,
@@ -58,28 +57,6 @@ export default function CursorNetworkPanel() {
       y: 0,
       smoothX: 0,
       smoothY: 0,
-    }
-
-    const makeGrainPattern = () => {
-      const grainCanvas = document.createElement('canvas')
-      grainCanvas.width = 96
-      grainCanvas.height = 96
-      const grainContext = grainCanvas.getContext('2d')
-      if (!grainContext) {
-        return null
-      }
-
-      const imageData = grainContext.createImageData(grainCanvas.width, grainCanvas.height)
-      const data = imageData.data
-      for (let i = 0; i < data.length; i += 4) {
-        const value = Math.floor(Math.random() * 255)
-        data[i] = value
-        data[i + 1] = value
-        data[i + 2] = value
-        data[i + 3] = Math.floor(10 + Math.random() * 26)
-      }
-      grainContext.putImageData(imageData, 0, 0)
-      return context.createPattern(grainCanvas, 'repeat')
     }
 
     const resize = () => {
@@ -96,7 +73,6 @@ export default function CursorNetworkPanel() {
 
       const nodeCount = clamp(Math.round((width * height) / 10800), 42, 92)
       nodes = createNodes(width, height, nodeCount)
-      grainPattern = makeGrainPattern()
 
       pointer.x = width * 0.62
       pointer.y = height * 0.44
@@ -131,20 +107,6 @@ export default function CursorNetworkPanel() {
       const targetY = pointer.active ? pointer.y : idleY
       pointer.smoothX += (targetX - pointer.smoothX) * 0.07
       pointer.smoothY += (targetY - pointer.smoothY) * 0.07
-
-      const haze = context.createRadialGradient(
-        pointer.smoothX,
-        pointer.smoothY,
-        0,
-        pointer.smoothX,
-        pointer.smoothY,
-        Math.max(width, height) * 0.46
-      )
-      haze.addColorStop(0, 'rgba(255,255,255,0.22)')
-      haze.addColorStop(0.42, 'rgba(255,255,255,0.08)')
-      haze.addColorStop(1, 'rgba(255,255,255,0)')
-      context.fillStyle = haze
-      context.fillRect(0, 0, width, height)
 
       const maxDistance = clamp(width * 0.16, 72, 124)
 
@@ -226,33 +188,6 @@ export default function CursorNetworkPanel() {
         context.fill()
       }
 
-      const lens = context.createRadialGradient(
-        pointer.smoothX,
-        pointer.smoothY,
-        0,
-        pointer.smoothX,
-        pointer.smoothY,
-        86
-      )
-      lens.addColorStop(0, 'rgba(255,255,255,0.11)')
-      lens.addColorStop(1, 'rgba(255,255,255,0)')
-      context.beginPath()
-      context.fillStyle = lens
-      context.arc(pointer.smoothX, pointer.smoothY, 86, 0, Math.PI * 2)
-      context.fill()
-
-      context.beginPath()
-      context.strokeStyle = 'rgba(252,252,255,0.24)'
-      context.lineWidth = 1
-      context.arc(pointer.smoothX, pointer.smoothY, 18, 0, Math.PI * 2)
-      context.stroke()
-
-      if (grainPattern) {
-        context.globalAlpha = 0.11
-        context.fillStyle = grainPattern
-        context.fillRect(0, 0, width, height)
-        context.globalAlpha = 1
-      }
     }
 
     resize()
@@ -274,22 +209,8 @@ export default function CursorNetworkPanel() {
   }, [])
 
   return (
-    <div
-      ref={wrapperRef}
-      className="relative h-full w-full overflow-hidden"
-      style={{
-        maskImage:
-          'radial-gradient(112% 94% at 44% 51%, rgba(0,0,0,1) 62%, rgba(0,0,0,0.4) 82%, transparent 100%)',
-      }}
-    >
+    <div ref={wrapperRef} className="relative h-full w-full">
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            'radial-gradient(circle at 16% 14%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 42%), linear-gradient(160deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 40%)',
-        }}
-      />
     </div>
   )
 }

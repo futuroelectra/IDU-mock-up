@@ -22,37 +22,19 @@ const menuItems: MenuItem[] = [
   {
     label: 'Solutions',
     columns: [
-      {
-        title: 'Plan',
-        links: ['Budgeting', 'Forecasting', 'Scenario Modeling'],
-      },
-      {
-        title: 'Optimize',
-        links: ['Cash Flow', 'Workforce Planning', 'Capex Planning'],
-      },
-      {
-        title: 'Coordinate',
-        links: ['Department Alignment', 'Project Visibility', 'Risk Signals'],
-      },
+      { title: 'Plan', links: ['Budgeting', 'Forecasting', 'Scenario Modeling'] },
+      { title: 'Optimize', links: ['Cash Flow', 'Workforce Planning', 'Capex Planning'] },
+      { title: 'Coordinate', links: ['Department Alignment', 'Project Visibility', 'Risk Signals'] },
     ],
     teaserTitle: 'Make Every Number Actionable',
-    teaserCopy: 'Move from annual budgets to continuous planning with fast, trusted decision loops.',
+    teaserCopy: 'Move from annual budgets to continuous planning with faster, trusted decision loops.',
   },
   {
     label: 'Platform',
     columns: [
-      {
-        title: 'Core',
-        links: ['Unified Data Model', 'Workflow Automation', 'Version Control'],
-      },
-      {
-        title: 'Trust',
-        links: ['Security Controls', 'Role Permissions', 'Audit Trails'],
-      },
-      {
-        title: 'Connect',
-        links: ['ERP Integrations', 'Data Connectors', 'Open APIs'],
-      },
+      { title: 'Core', links: ['Unified Data Model', 'Workflow Automation', 'Version Control'] },
+      { title: 'Trust', links: ['Security Controls', 'Role Permissions', 'Audit Trails'] },
+      { title: 'Connect', links: ['ERP Integrations', 'Data Connectors', 'Open APIs'] },
     ],
     teaserTitle: 'Enterprise Foundation',
     teaserCopy: 'Built for multi-entity complexity without sacrificing speed, clarity, or adoption.',
@@ -60,18 +42,9 @@ const menuItems: MenuItem[] = [
   {
     label: 'Customers',
     columns: [
-      {
-        title: 'Industries',
-        links: ['Financial Services', 'Healthcare', 'Manufacturing'],
-      },
-      {
-        title: 'Stories',
-        links: ['Transformation Journeys', 'Global Rollouts', 'Operational Wins'],
-      },
-      {
-        title: 'Outcomes',
-        links: ['Faster Planning Cycles', 'Higher Forecast Accuracy', 'Stronger Ownership'],
-      },
+      { title: 'Industries', links: ['Financial Services', 'Healthcare', 'Manufacturing'] },
+      { title: 'Stories', links: ['Transformation Journeys', 'Global Rollouts', 'Operational Wins'] },
+      { title: 'Outcomes', links: ['Faster Planning Cycles', 'Higher Forecast Accuracy', 'Stronger Ownership'] },
     ],
     teaserTitle: 'Proven in Real Operations',
     teaserCopy: 'Teams across regions and business units run cleaner planning with less friction.',
@@ -79,18 +52,9 @@ const menuItems: MenuItem[] = [
   {
     label: 'Resources',
     columns: [
-      {
-        title: 'Learn',
-        links: ['Guides', 'Playbooks', 'Short Courses'],
-      },
-      {
-        title: 'Explore',
-        links: ['Webinars', 'Benchmark Reports', 'Use-Case Library'],
-      },
-      {
-        title: 'Support',
-        links: ['Documentation', 'Implementation Paths', 'Best Practices'],
-      },
+      { title: 'Learn', links: ['Guides', 'Playbooks', 'Short Courses'] },
+      { title: 'Explore', links: ['Webinars', 'Benchmark Reports', 'Use-Case Library'] },
+      { title: 'Support', links: ['Documentation', 'Implementation Paths', 'Best Practices'] },
     ],
     teaserTitle: 'Knowledge for Finance Leaders',
     teaserCopy: 'Practical frameworks and templates your teams can apply immediately.',
@@ -98,18 +62,9 @@ const menuItems: MenuItem[] = [
   {
     label: 'Partners',
     columns: [
-      {
-        title: 'Network',
-        links: ['Advisory Partners', 'Delivery Partners', 'Regional Specialists'],
-      },
-      {
-        title: 'Programs',
-        links: ['Partner Enablement', 'Co-Sell Motion', 'Certification'],
-      },
-      {
-        title: 'Grow',
-        links: ['Market Expansion', 'Joint Value Propositions', 'Success Planning'],
-      },
+      { title: 'Network', links: ['Advisory Partners', 'Delivery Partners', 'Regional Specialists'] },
+      { title: 'Programs', links: ['Partner Enablement', 'Co-Sell Motion', 'Certification'] },
+      { title: 'Grow', links: ['Market Expansion', 'Joint Value Propositions', 'Success Planning'] },
     ],
     teaserTitle: 'Built for Collaboration',
     teaserCopy: 'Work with a partner ecosystem designed to scale adoption and business impact.',
@@ -117,43 +72,40 @@ const menuItems: MenuItem[] = [
   {
     label: 'About',
     columns: [
-      {
-        title: 'Company',
-        links: ['Vision', 'Leadership', 'Culture'],
-      },
-      {
-        title: 'News',
-        links: ['Announcements', 'Events', 'Press Resources'],
-      },
-      {
-        title: 'Careers',
-        links: ['Open Roles', 'Hiring Process', 'Life at IDU'],
-      },
+      { title: 'Company', links: ['Vision', 'Leadership', 'Culture'] },
+      { title: 'News', links: ['Announcements', 'Events', 'Press Resources'] },
+      { title: 'Careers', links: ['Open Roles', 'Hiring Process', 'Life at IDU'] },
     ],
     teaserTitle: 'People Behind the Product',
     teaserCopy: 'A team focused on helping organizations build confidence in every planning decision.',
   },
 ]
 
-const ChevronDown = ({ open }: { open: boolean }) => (
-  <svg
-    className={`h-3 w-3 text-white/70 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
-    viewBox="0 0 16 16"
-    fill="currentColor"
-    aria-hidden="true"
-  >
-    <path d="M4.22 5.97a.75.75 0 0 1 1.06 0L8 8.69l2.72-2.72a.75.75 0 0 1 1.06 1.06L8.53 10.28a.75.75 0 0 1-1.06 0L4.22 7.03a.75.75 0 0 1 0-1.06Z" />
-  </svg>
-)
+function ChevronDown({ open, lightMode }: { open: boolean; lightMode: boolean }) {
+  return (
+    <svg
+      className={`h-3 w-3 transition-transform duration-200 ${open ? 'rotate-180' : ''} ${
+        lightMode ? 'text-[#204a92]/70' : 'text-white/70'
+      }`}
+      viewBox="0 0 16 16"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M4.22 5.97a.75.75 0 0 1 1.06 0L8 8.69l2.72-2.72a.75.75 0 0 1 1.06 1.06L8.53 10.28a.75.75 0 0 1-1.06 0L4.22 7.03a.75.75 0 0 1 0-1.06Z" />
+    </svg>
+  )
+}
 
 export default function MarkupThreeNav() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
   const [isHidden, setIsHidden] = useState(false)
+  const [lightMode, setLightMode] = useState(false)
   const lastScrollY = useRef(0)
 
   useEffect(() => {
     const onScroll = () => {
       const currentY = window.scrollY
+
       if (currentY < 20) {
         setIsHidden(false)
       } else if (currentY > lastScrollY.current && currentY > 72) {
@@ -161,13 +113,51 @@ export default function MarkupThreeNav() {
       } else if (currentY < lastScrollY.current) {
         setIsHidden(false)
       }
-      lastScrollY.current = currentY
+
+      const lightStart = document.getElementById('nav-light-start')
+      if (lightStart) {
+        setLightMode(lightStart.getBoundingClientRect().top <= 104)
+      } else {
+        setLightMode(currentY > window.innerHeight * 0.7)
+      }
+
       setOpenIndex(null)
+      lastScrollY.current = currentY
     }
 
+    onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  const logoSrc = lightMode ? `${basePath}/idu-inverted-logo.png` : `${basePath}/idu-logo.png`
+
+  const navGlassStyle = lightMode
+    ? {
+        background:
+          'linear-gradient(112deg, rgba(255,255,255,0.92) 0%, rgba(242,247,255,0.9) 35%, rgba(236,244,255,0.9) 100%)',
+        boxShadow:
+          '0 24px 52px -40px rgba(37,87,170,0.42), inset 0 1px 0 rgba(255,255,255,0.88), inset 0 -1px 0 rgba(141,176,236,0.34)',
+      }
+    : {
+        background:
+          'linear-gradient(110deg, rgba(255,255,255,0.16) 0%, rgba(127,179,255,0.11) 25%, rgba(83,137,232,0.08) 55%, rgba(255,255,255,0.14) 100%)',
+        boxShadow:
+          '0 24px 56px -38px rgba(45,145,255,0.9), inset 0 1px 0 rgba(255,255,255,0.58), inset 0 -1px 0 rgba(255,255,255,0.15)',
+      }
+
+  const dropdownStyle = lightMode
+    ? {
+        background:
+          'linear-gradient(125deg, rgba(255,255,255,0.97) 0%, rgba(245,250,255,0.97) 55%, rgba(250,252,255,0.98) 100%)',
+        boxShadow:
+          '0 28px 55px -36px rgba(31,78,153,0.35), inset 0 1px 0 rgba(255,255,255,0.92), inset 0 -1px 0 rgba(189,211,247,0.45)',
+      }
+    : {
+        background:
+          'linear-gradient(125deg, rgba(8,18,54,0.92) 0%, rgba(10,30,74,0.9) 45%, rgba(7,18,47,0.95) 100%)',
+        boxShadow: '0 30px 60px -30px rgba(0,0,0,0.75), inset 0 1px 0 rgba(255,255,255,0.22)',
+      }
 
   return (
     <header
@@ -176,28 +166,22 @@ export default function MarkupThreeNav() {
       }`}
       onMouseLeave={() => setOpenIndex(null)}
     >
-      <nav className="mx-auto max-w-6xl">
+      <nav className="mx-auto max-w-[88rem]">
         <div
-          className="relative flex h-16 items-center rounded-full border border-white/20 px-2 backdrop-blur-2xl"
-          style={{
-            background:
-              'linear-gradient(110deg, rgba(255,255,255,0.16) 0%, rgba(127,179,255,0.11) 25%, rgba(83,137,232,0.08) 55%, rgba(255,255,255,0.14) 100%)',
-            boxShadow:
-              '0 24px 56px -38px rgba(45,145,255,0.9), inset 0 1px 0 rgba(255,255,255,0.58), inset 0 -1px 0 rgba(255,255,255,0.15)',
-          }}
+          className={`relative flex h-16 items-center rounded-full border px-2 backdrop-blur-2xl ${
+            lightMode ? 'border-[#bdd4f5]' : 'border-white/20'
+          }`}
+          style={navGlassStyle}
         >
-          <div className="pointer-events-none absolute inset-x-16 top-0 h-px bg-gradient-to-r from-transparent via-white/85 to-transparent" />
+          <div
+            className={`pointer-events-none absolute inset-x-16 top-0 h-px bg-gradient-to-r from-transparent to-transparent ${
+              lightMode ? 'via-[#ffffff]' : 'via-white/85'
+            }`}
+          />
 
-          <div className="flex h-full w-40 items-center pl-2">
+          <div className="flex h-full w-44 items-center pl-2">
             <Link href="/" className="relative z-10 flex shrink-0 items-center">
-              <Image
-                src={`${basePath}/idu-logo.png`}
-                alt="IDU"
-                width={120}
-                height={49}
-                className="h-8 w-auto"
-                unoptimized
-              />
+              <Image src={logoSrc} alt="IDU" width={120} height={49} className="h-8 w-auto" unoptimized />
             </Link>
           </div>
 
@@ -213,27 +197,37 @@ export default function MarkupThreeNav() {
                 >
                   <button
                     type="button"
-                    className="flex items-center gap-1 rounded-full px-3 py-2 text-sm text-white/85 transition-all duration-200 hover:bg-white/12 hover:text-white"
+                    className={`flex items-center gap-1 rounded-full px-3 py-2 text-sm transition-all duration-200 ${
+                      lightMode
+                        ? 'text-[#153771]/85 hover:bg-[#e7f0ff] hover:text-[#0d2a5e]'
+                        : 'text-white/85 hover:bg-white/12 hover:text-white'
+                    }`}
                   >
                     <span>{item.label}</span>
-                    <ChevronDown open={isOpen} />
+                    <ChevronDown open={isOpen} lightMode={lightMode} />
                   </button>
 
                   {isOpen && (
-                    <div className="absolute left-1/2 top-full w-[min(96vw,1020px)] -translate-x-1/2 pt-3">
+                    <div className="absolute left-1/2 top-full w-[min(96vw,1060px)] -translate-x-1/2 pt-3">
                       <div
-                        className="rounded-3xl border border-white/16 p-4 backdrop-blur-2xl"
-                        style={{
-                          background:
-                            'linear-gradient(125deg, rgba(8,18,54,0.92) 0%, rgba(10,30,74,0.9) 45%, rgba(7,18,47,0.95) 100%)',
-                          boxShadow:
-                            '0 30px 60px -30px rgba(0,0,0,0.75), inset 0 1px 0 rgba(255,255,255,0.22)',
-                        }}
+                        className={`rounded-3xl border p-4 backdrop-blur-2xl ${
+                          lightMode ? 'border-[#d4e3fb]' : 'border-white/16'
+                        }`}
+                        style={dropdownStyle}
                       >
                         <div className="grid grid-cols-[1fr_1fr_1fr_320px] gap-3">
                           {item.columns.map((column) => (
-                            <div key={column.title} className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-                              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-sky-200/80">
+                            <div
+                              key={column.title}
+                              className={`rounded-2xl border p-4 ${
+                                lightMode ? 'border-[#d8e6fd] bg-[#f6faff]' : 'border-white/10 bg-white/[0.04]'
+                              }`}
+                            >
+                              <p
+                                className={`text-[11px] font-semibold uppercase tracking-[0.2em] ${
+                                  lightMode ? 'text-[#2f5ea8]' : 'text-sky-200/80'
+                                }`}
+                              >
                                 {column.title}
                               </p>
                               <ul className="mt-3 space-y-1.5">
@@ -241,7 +235,11 @@ export default function MarkupThreeNav() {
                                   <li key={link}>
                                     <Link
                                       href="#"
-                                      className="block rounded-lg px-2 py-1.5 text-sm text-white/84 transition-colors hover:bg-white/10 hover:text-white"
+                                      className={`block rounded-lg px-2 py-1.5 text-sm transition-colors ${
+                                        lightMode
+                                          ? 'text-[#1d3e75] hover:bg-[#e8f2ff]'
+                                          : 'text-white/84 hover:bg-white/10 hover:text-white'
+                                      }`}
                                     >
                                       {link}
                                     </Link>
@@ -250,17 +248,39 @@ export default function MarkupThreeNav() {
                               </ul>
                             </div>
                           ))}
-                          <aside className="flex h-full flex-col justify-between rounded-2xl border border-white/12 bg-gradient-to-br from-sky-300/18 via-white/8 to-white/[0.02] p-5">
+                          <aside
+                            className={`flex h-full flex-col justify-between rounded-2xl border p-5 ${
+                              lightMode
+                                ? 'border-[#d9e7fc] bg-gradient-to-br from-[#edf5ff] via-white to-[#f5f9ff]'
+                                : 'border-white/12 bg-gradient-to-br from-sky-300/18 via-white/8 to-white/[0.02]'
+                            }`}
+                          >
                             <div>
-                              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-sky-100/75">Overview</p>
-                              <h3 className="mt-3 font-manrope text-xl font-semibold leading-tight text-white">
+                              <p
+                                className={`text-xs font-semibold uppercase tracking-[0.22em] ${
+                                  lightMode ? 'text-[#3d67ab]' : 'text-sky-100/75'
+                                }`}
+                              >
+                                Overview
+                              </p>
+                              <h3
+                                className={`mt-3 font-manrope text-xl font-semibold leading-tight ${
+                                  lightMode ? 'text-[#0b2555]' : 'text-white'
+                                }`}
+                              >
                                 {item.teaserTitle}
                               </h3>
-                              <p className="mt-3 text-sm leading-relaxed text-white/72">{item.teaserCopy}</p>
+                              <p className={`mt-3 text-sm leading-relaxed ${lightMode ? 'text-[#35538a]' : 'text-white/72'}`}>
+                                {item.teaserCopy}
+                              </p>
                             </div>
                             <Link
                               href="#"
-                              className="mt-5 inline-flex w-fit items-center rounded-full border border-white/30 bg-white/12 px-3.5 py-2 text-sm font-medium text-white transition-colors hover:bg-white/20"
+                              className={`mt-5 inline-flex w-fit items-center rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${
+                                lightMode
+                                  ? 'border border-[#c4d8fa] bg-white text-[#123a79] hover:bg-[#eef5ff]'
+                                  : 'border border-white/30 bg-white/12 text-white hover:bg-white/20'
+                              }`}
                             >
                               Explore
                             </Link>
@@ -274,10 +294,10 @@ export default function MarkupThreeNav() {
             })}
           </div>
 
-          <div className="ml-auto flex h-full w-40 items-center justify-end pr-2">
+          <div className="ml-auto flex h-full w-44 items-center justify-end pr-2">
             <Link
               href="#"
-              className="inline-flex shrink-0 items-center rounded-full border border-black/10 bg-white px-5 py-2 text-sm font-semibold text-black transition-colors hover:bg-white/90"
+              className="inline-flex shrink-0 items-center rounded-full border border-[#f4a424]/40 bg-[#f0a01f] px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#f3ab30]"
             >
               CTA
             </Link>

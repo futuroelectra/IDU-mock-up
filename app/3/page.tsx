@@ -1,100 +1,97 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import MarkupThreeNav from '@/components/MarkupThreeNav'
 import CursorNetworkPanel from '@/components/CursorNetworkPanel'
+import { megaMenuData } from '@/components/navMenuData'
 
-const capabilityCards = [
+const basePath = process.env.NODE_ENV === 'production' ? '/IDU-mock-up' : ''
+
+const highlightCards = [
   {
-    title: 'Adaptive Forecasting',
-    copy: 'Move from static annual cycles to rolling forecasts that update with live operational signals.',
+    title: 'Forecast With Confidence',
+    copy: 'Unify planning assumptions and move from monthly reporting to continuous decision support.',
   },
   {
-    title: 'Cross-Team Ownership',
-    copy: 'Give department leaders clear budget accountability without forcing finance-heavy workflows.',
+    title: 'Operate With Accountability',
+    copy: 'Give business leaders ownership through intuitive workflows and controlled financial guardrails.',
   },
   {
-    title: 'Decision Velocity',
-    copy: 'Shorten planning cycles with aligned assumptions, structured approvals, and immediate visibility.',
+    title: 'Scale Across Regions',
+    copy: 'Coordinate multi-entity and multi-currency planning in one connected operating model.',
   },
 ]
 
-const pillars = [
+const capabilityPillars = [
   {
-    label: 'PLAN',
-    title: 'Design Resilient Scenarios',
-    copy: 'Build plans around likely, upside, and stress conditions so leadership decisions are never single-path.',
+    label: 'Strategic Planning',
+    title: 'Scenario Design',
+    copy: 'Model multiple futures, test risk exposure, and commit to plans with stronger confidence.',
   },
   {
-    label: 'ALIGN',
-    title: 'Coordinate Every Department',
-    copy: 'Connect strategy, operations, and finance through one model that keeps teams synchronized.',
+    label: 'Operational Planning',
+    title: 'Department Alignment',
+    copy: 'Link top-down targets with bottom-up execution so every team can contribute meaningfully.',
   },
   {
-    label: 'EXECUTE',
-    title: 'Track Impact in Real Time',
-    copy: 'Watch performance against plan continuously and adjust before variance becomes risk.',
-  },
-]
-
-const roleCards = [
-  {
-    title: 'For Finance Leaders',
-    copy: 'Gain governance, auditability, and confidence in every model version without slowing teams down.',
-    outcome: 'Outcome: stronger control with faster decisions.',
-  },
-  {
-    title: 'For Operational Teams',
-    copy: 'Work with clean, human-centered planning flows that remove spreadsheet sprawl and confusion.',
-    outcome: 'Outcome: higher adoption and clearer accountability.',
+    label: 'Performance Insight',
+    title: 'Live Visibility',
+    copy: 'Track plan versus actual in real time and react before variance compounds into strategic drift.',
   },
 ]
 
-const executionFlow = [
-  'Define strategic targets and constraints.',
+const journeySteps = [
+  'Set strategic priorities and guardrails.',
   'Translate targets into department plans.',
-  'Monitor live performance and variances.',
-  'Run guided re-forecast cycles with confidence.',
+  'Monitor execution against live performance.',
+  'Re-forecast with aligned assumptions.',
+]
+
+const proofStats = [
+  { value: '40%', label: 'Faster planning cycles' },
+  { value: '3x', label: 'Higher business participation' },
+  { value: '99%', label: 'Decision traceability' },
 ]
 
 export default function Page3() {
   return (
-    <main className="min-h-screen overflow-x-hidden bg-[#060224] text-white">
-      <div
-        className="fixed inset-0 -z-20"
-        style={{
-          background:
-            'radial-gradient(circle at 16% 9%, rgba(36, 104, 210, 0.34) 0%, rgba(7, 2, 40, 0) 46%), radial-gradient(circle at 78% 36%, rgba(22, 126, 244, 0.3) 0%, rgba(7, 2, 40, 0) 42%), linear-gradient(180deg, #04011f 0%, #060224 38%, #091a45 68%, #dfeaf9 100%)',
-        }}
-      />
-      <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.04)_0%,transparent_30%)]" />
-
+    <main className="min-h-screen overflow-x-hidden bg-white text-[#0f2f68]">
       <MarkupThreeNav />
 
-      <section className="mx-auto flex min-h-[calc(100vh-3.5rem)] max-w-[88rem] items-center px-6 pb-20 pt-36 sm:px-8 sm:pt-40 xl:px-10">
-        <div className="grid w-full gap-12 md:grid-cols-[1.08fr_0.92fr] md:items-center">
-          <div className="mx-auto h-[320px] w-full max-w-[760px] sm:h-[420px] lg:h-[500px]">
+      <section className="relative overflow-hidden bg-[#050221] pb-32 pt-36 text-white sm:pt-40">
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              'radial-gradient(circle at 8% 20%, rgba(58,120,226,0.26) 0%, rgba(5,2,33,0) 42%), radial-gradient(circle at 78% 22%, rgba(24,102,209,0.29) 0%, rgba(5,2,33,0) 44%), linear-gradient(180deg, #04011d 0%, #07022d 100%)',
+          }}
+        />
+
+        <div className="relative mx-auto grid max-w-[94rem] items-center gap-14 px-6 sm:px-8 lg:grid-cols-[1.2fr_0.96fr] xl:px-10">
+          <div className="h-[340px] w-full sm:h-[440px] lg:h-[520px]">
             <CursorNetworkPanel />
           </div>
 
-          <div className="md:pl-3">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-blue-200/82">Enterprise Planning Platform</p>
             <h1
-              className="font-manrope text-[2.65rem] font-extrabold leading-[1.02] tracking-[-0.03em] text-transparent sm:text-[3.35rem] lg:text-[4rem]"
+              className="mt-5 font-manrope text-[2.7rem] font-extrabold leading-[1.01] tracking-[-0.03em] text-transparent sm:text-[3.55rem] lg:text-[4.2rem]"
               style={{
                 backgroundImage:
-                  'linear-gradient(100deg, #ffffff 0%, rgba(248,252,255,0.97) 35%, rgba(223,236,255,0.72) 65%, rgba(151,177,226,0.16) 100%)',
+                  'linear-gradient(100deg, #ffffff 0%, rgba(247,250,255,0.97) 38%, rgba(213,228,255,0.65) 72%, rgba(120,150,210,0.18) 100%)',
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
               }}
             >
               Africa&apos;s leading financial planning solution.
             </h1>
-            <p className="mt-7 max-w-xl text-lg leading-relaxed text-blue-50/78">
+            <p className="mt-7 max-w-xl text-lg leading-relaxed text-blue-50/80">
               Trusted by global enterprises across Africa, Europe, the Middle East, and North America.
             </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-3.5">
               <a
                 href="#"
-                className="inline-flex items-center gap-2 rounded-xl border border-amber-300/45 bg-[#f0a01f] px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#f3ab30] hover:shadow-[0_16px_34px_-18px_rgba(255,181,66,0.95)]"
+                className="inline-flex items-center gap-2 rounded-xl border border-[#f5be68]/35 bg-[#f0a01f] px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#f4ae32]"
               >
                 <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
@@ -103,7 +100,7 @@ export default function Page3() {
               </a>
               <a
                 href="#"
-                className="inline-flex items-center gap-2 rounded-xl border border-white/25 bg-white/12 px-5 py-3 text-sm font-medium text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/20"
+                className="inline-flex items-center gap-2 rounded-xl border border-white/28 bg-white/10 px-5 py-3 text-sm font-medium text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/18"
               >
                 <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -111,88 +108,91 @@ export default function Page3() {
                 Explore IDU
               </a>
             </div>
+
+            <div className="mt-10 grid max-w-xl grid-cols-3 gap-4">
+              {proofStats.map((item) => (
+                <div key={item.label} className="rounded-xl border border-white/14 bg-white/[0.04] p-3">
+                  <p className="font-manrope text-2xl font-bold text-white">{item.value}</p>
+                  <p className="mt-1 text-xs text-blue-100/72">{item.label}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
+
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-white/0 to-white" />
       </section>
 
-      <section className="px-6 pb-24 pt-12 text-white">
-        <div className="mx-auto max-w-[88rem] rounded-[2rem] border border-white/16 bg-white/[0.045] p-8 backdrop-blur-xl sm:p-10 xl:px-12">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-blue-100/70">Planning Reinvented</p>
-          <div className="mt-5 grid gap-6 md:grid-cols-[1.1fr_1fr] md:items-end">
-            <h2 className="font-manrope text-3xl font-semibold leading-tight text-white sm:text-4xl">
-              Replace financial drag with connected, high-velocity planning.
-            </h2>
-            <p className="text-base leading-relaxed text-blue-50/72">
-              IDU helps enterprises unify budgeting, forecasting, and execution in one clear operating rhythm.
+      <section id="nav-light-start" className="bg-white px-6 pb-24 pt-20 sm:px-8 xl:px-10">
+        <div className="mx-auto max-w-[94rem] rounded-[2.1rem] border border-[#d7e4fb] bg-gradient-to-r from-white via-[#f8fbff] to-[#f6faff] p-8 shadow-[0_34px_70px_-56px_rgba(28,76,152,0.45)] sm:p-10">
+          <div className="grid gap-8 lg:grid-cols-[1.06fr_1fr] lg:items-end">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#2f6cc6]">Planning Reinvented</p>
+              <h2 className="mt-4 font-manrope text-3xl font-semibold leading-tight text-[#07275f] sm:text-4xl">
+                Replace planning friction with a model your whole business can trust.
+              </h2>
+            </div>
+            <p className="text-base leading-relaxed text-[#35558d]">
+              IDU gives finance and operational teams one coordinated workflow from strategy to execution, with
+              governance built in from day one.
             </p>
           </div>
           <div className="mt-10 grid gap-4 md:grid-cols-3">
-            {capabilityCards.map((card) => (
+            {highlightCards.map((card) => (
               <article
                 key={card.title}
-                className="rounded-2xl border border-white/16 bg-white/[0.03] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-100/40 hover:bg-white/[0.075]"
+                className="rounded-2xl border border-[#dbe8ff] bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#9ec2ff]"
               >
-                <h3 className="font-manrope text-lg font-semibold text-white">{card.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-blue-100/74">{card.copy}</p>
+                <h3 className="font-manrope text-xl font-semibold text-[#0b2d67]">{card.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-[#3c5b92]">{card.copy}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-[#f6f9ff] px-6 py-24 text-[#102a58]">
-        <div className="mx-auto max-w-[88rem] xl:px-4">
+      <section className="bg-[#f4f8ff] px-6 py-24 sm:px-8 xl:px-10">
+        <div className="mx-auto max-w-[94rem]">
           <div className="max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#2b65bf]">Core Capabilities</p>
-            <h2 className="mt-4 font-manrope text-3xl font-semibold leading-tight text-[#081c43] sm:text-4xl">
-              A modern operating layer for finance and business teams.
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#2f6cc6]">Core Capabilities</p>
+            <h2 className="mt-4 font-manrope text-3xl font-semibold leading-tight text-[#07275f] sm:text-4xl">
+              Built for modern finance teams that need speed and strategic control.
             </h2>
           </div>
           <div className="mt-12 grid gap-5 md:grid-cols-3">
-            {pillars.map((pillar) => (
+            {capabilityPillars.map((pillar) => (
               <article
                 key={pillar.title}
-                className="rounded-3xl border border-[#d7e6ff] bg-white p-7 shadow-[0_30px_50px_-40px_rgba(38,88,170,0.65)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_38px_70px_-42px_rgba(38,88,170,0.78)]"
+                className="rounded-[1.8rem] border border-[#d8e6ff] bg-white p-7 shadow-[0_35px_60px_-50px_rgba(31,79,156,0.58)] transition-all duration-300 hover:-translate-y-1"
               >
-                <p className="text-[11px] font-bold tracking-[0.22em] text-[#2f6fd2]">{pillar.label}</p>
-                <h3 className="mt-4 font-manrope text-xl font-semibold text-[#0b2354]">{pillar.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-[#35528b]">{pillar.copy}</p>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#2f6cc6]">{pillar.label}</p>
+                <h3 className="mt-4 font-manrope text-xl font-semibold text-[#0a2c67]">{pillar.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-[#3b5b91]">{pillar.copy}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-white px-6 pb-24 text-[#102a58]">
-        <div className="mx-auto grid max-w-[88rem] gap-6 md:grid-cols-2 xl:px-4">
-          {roleCards.map((role) => (
-            <article
-              key={role.title}
-              className="rounded-[2rem] border border-[#d8e6ff] bg-gradient-to-br from-white to-[#f2f7ff] p-8 shadow-[0_24px_46px_-38px_rgba(30,89,180,0.65)]"
-            >
-              <h3 className="font-manrope text-2xl font-semibold text-[#0b2354]">{role.title}</h3>
-              <p className="mt-4 text-base leading-relaxed text-[#35528b]">{role.copy}</p>
-              <p className="mt-6 border-t border-[#d7e4f9] pt-5 text-sm font-semibold text-[#0f377a]">{role.outcome}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-[#eef4ff] px-6 py-24 text-[#102a58]">
-        <div className="mx-auto max-w-[88rem] xl:px-4">
-          <div className="rounded-[2rem] border border-[#d3e3ff] bg-white p-8 sm:p-10">
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#2b65bf]">Execution Loop</p>
-            <h2 className="mt-4 max-w-3xl font-manrope text-3xl font-semibold leading-tight text-[#081c43] sm:text-4xl">
-              One planning rhythm from boardroom direction to day-to-day delivery.
-            </h2>
-            <div className="mt-10 grid gap-4 md:grid-cols-4">
-              {executionFlow.map((item, index) => (
+      <section className="bg-white px-6 py-24 sm:px-8 xl:px-10">
+        <div className="mx-auto max-w-[94rem] rounded-[2rem] border border-[#dae7ff] bg-gradient-to-r from-[#ffffff] via-[#f9fbff] to-[#f5f9ff] p-8 sm:p-10">
+          <div className="grid gap-10 lg:grid-cols-[1fr_1fr]">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#2f6cc6]">Operating Rhythm</p>
+              <h2 className="mt-4 font-manrope text-3xl font-semibold leading-tight text-[#07275f] sm:text-4xl">
+                One connected loop from board-level direction to daily decisions.
+              </h2>
+            </div>
+            <div className="grid gap-3">
+              {journeySteps.map((step, index) => (
                 <div
-                  key={item}
-                  className="group rounded-2xl border border-[#dbe8ff] bg-[#f9fbff] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#9ec2ff] hover:bg-white"
+                  key={step}
+                  className="flex items-start gap-4 rounded-xl border border-[#dfeaff] bg-white p-4 transition-colors hover:border-[#9ec2ff]"
                 >
-                  <p className="text-[11px] font-semibold tracking-[0.2em] text-[#2f6fd2]">STEP {index + 1}</p>
-                  <p className="mt-2 text-sm leading-relaxed text-[#27467f]">{item}</p>
+                  <span className="mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#f0a01f] text-xs font-semibold text-white">
+                    {index + 1}
+                  </span>
+                  <p className="text-sm leading-relaxed text-[#2f4f86]">{step}</p>
                 </div>
               ))}
             </div>
@@ -200,26 +200,86 @@ export default function Page3() {
         </div>
       </section>
 
-      <section className="bg-white px-6 pb-24 text-[#102a58]">
-        <div className="mx-auto max-w-[88rem] rounded-[2rem] border border-[#d8e6ff] bg-gradient-to-r from-[#071c45] via-[#11306b] to-[#1c4a98] p-9 text-white sm:p-12 xl:px-14">
-          <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/72">Enterprise Feedback</p>
-              <blockquote className="mt-4 max-w-3xl font-manrope text-2xl font-medium leading-snug text-white sm:text-[2rem]">
-                “IDU helped us eliminate disconnected planning routines and gave every team one trusted view of the
-                plan.”
-              </blockquote>
-              <p className="mt-4 text-sm text-white/78">Finance Director, Multi-Entity Services Group</p>
-            </div>
-            <Link
-              href="#"
-              className="inline-flex h-fit items-center rounded-full border border-white/35 bg-white/14 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/24"
-            >
-              Start Your Evaluation
-            </Link>
+      <section className="bg-[#071d49] px-6 py-20 text-white sm:px-8 xl:px-10">
+        <div className="mx-auto grid max-w-[94rem] gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-blue-100/72">Enterprise Proof</p>
+            <blockquote className="mt-4 max-w-4xl font-manrope text-2xl font-medium leading-snug sm:text-3xl">
+              “IDU gave us one planning language across finance and operations, with cleaner accountability and faster
+              decisions.”
+            </blockquote>
+            <p className="mt-4 text-sm text-blue-100/72">Finance Director, Multi-Entity Services Group</p>
           </div>
+          <Link
+            href="#"
+            className="inline-flex h-fit items-center rounded-full border border-[#f4b763]/35 bg-[#f0a01f] px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#f4ae32]"
+          >
+            Start Your Evaluation
+          </Link>
         </div>
       </section>
+
+      <footer className="border-t border-[#d7e5fd] bg-white px-6 pb-10 pt-14 sm:px-8 xl:px-10">
+        <div className="mx-auto max-w-[94rem]">
+          <div className="flex flex-col gap-6 border-b border-[#deebff] pb-10 sm:flex-row sm:items-center sm:justify-between">
+            <Link href="/" className="w-fit">
+              <Image
+                src={`${basePath}/idu-inverted-logo.png`}
+                alt="IDU"
+                width={120}
+                height={49}
+                className="h-8 w-auto"
+                unoptimized
+              />
+            </Link>
+            <Link
+              href="#"
+              className="inline-flex w-fit items-center rounded-full border border-[#f5be68]/40 bg-[#f0a01f] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#f4ae32]"
+            >
+              Partner with IDU
+            </Link>
+          </div>
+
+          <nav className="grid grid-cols-2 gap-x-8 gap-y-10 pb-10 pt-10 md:grid-cols-5" aria-label="Site map">
+            {megaMenuData.map((item) => (
+              <div key={item.label}>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#0f2f68]">{item.label}</p>
+                <ul className="mt-4 space-y-4">
+                  {item.groups.map((group) => (
+                    <li key={group.title}>
+                      <p className="mb-1.5 text-[11px] uppercase tracking-[0.16em] text-[#5a78ad]">{group.title}</p>
+                      <ul className="space-y-1.5">
+                        {group.links.map((link) => (
+                          <li key={link.label}>
+                            <Link href={link.href ?? '#'} className="text-sm text-[#2d4e86] transition-colors hover:text-[#0f2f68]">
+                              {link.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </nav>
+
+          <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[#e5efff] pt-6">
+            <p className="text-xs text-[#5a78ad]">© {new Date().getFullYear()} IDU. All rights reserved.</p>
+            <div className="flex items-center gap-6">
+              <Link href="#" className="text-xs text-[#5a78ad] hover:text-[#0f2f68]">
+                Privacy
+              </Link>
+              <Link href="#" className="text-xs text-[#5a78ad] hover:text-[#0f2f68]">
+                Terms
+              </Link>
+              <Link href="#" className="text-xs text-[#5a78ad] hover:text-[#0f2f68]">
+                Contact
+              </Link>
+            </div>
+          </div>
+        </div>
+      </footer>
     </main>
   )
 }
