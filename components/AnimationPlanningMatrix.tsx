@@ -21,6 +21,7 @@ type Pulse = {
 }
 
 const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value))
+const CURSOR_FORCE = 0.05
 
 const roundedRect = (ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) => {
   const radius = Math.min(r, w / 2, h / 2)
@@ -179,8 +180,8 @@ export default function AnimationPlanningMatrix() {
       const targetY = pointer.active ? pointer.y : idleY
       const lastX = pointer.smoothX
       const lastY = pointer.smoothY
-      pointer.smoothX += (targetX - pointer.smoothX) * 0.07
-      pointer.smoothY += (targetY - pointer.smoothY) * 0.07
+      pointer.smoothX += (targetX - pointer.smoothX) * 0.05
+      pointer.smoothY += (targetY - pointer.smoothY) * 0.05
       pointer.vx = pointer.smoothX - lastX
       pointer.vy = pointer.smoothY - lastY
       const pointerSpeed = Math.hypot(pointer.vx, pointer.vy)
@@ -188,7 +189,7 @@ export default function AnimationPlanningMatrix() {
       cells.forEach((cell) => {
         cell.energy *= 0.9
         const influence = clamp(1 - Math.hypot(cell.x - pointer.smoothX, cell.y - pointer.smoothY) / 185, 0, 1)
-        cell.energy += influence * 0.045
+        cell.energy += influence * 0.045 * CURSOR_FORCE
       })
 
       routes.forEach((route) => {
@@ -208,7 +209,7 @@ export default function AnimationPlanningMatrix() {
 
       pulses.forEach((pulse) => {
         const route = routes[pulse.routeIndex]
-        pulse.progress += pulse.speed * (1 + pointerSpeed * 0.22)
+        pulse.progress += pulse.speed * (1 + pointerSpeed * 0.22 * CURSOR_FORCE)
         if (pulse.progress > 1) {
           pulse.progress = 0
           pulse.segment += 1
@@ -228,7 +229,7 @@ export default function AnimationPlanningMatrix() {
         const dy = pointer.smoothY - y
         const dist = Math.hypot(dx, dy)
         const influence = clamp(1 - dist / 145, 0, 1)
-        const size = pulse.size * (1 + influence * 0.18)
+        const size = pulse.size * (1 + influence * 0.18 * CURSOR_FORCE)
 
         context.beginPath()
         context.fillStyle = `rgba(255,255,255,${0.72 + influence * 0.2})`
@@ -238,7 +239,7 @@ export default function AnimationPlanningMatrix() {
         cells.forEach((cell) => {
           const d = Math.hypot(cell.x - x, cell.y - y)
           if (d < 62) {
-            cell.energy += (1 - d / 62) * 0.11
+            cell.energy += (1 - d / 62) * 0.11 * CURSOR_FORCE
           }
         })
       })
@@ -249,9 +250,9 @@ export default function AnimationPlanningMatrix() {
         const dy = pointer.smoothY - cell.y
         const dist = Math.hypot(dx, dy)
         const pull = clamp(1 - dist / 190, 0, 1)
-        const shiftX = dx * pull * 0.03
-        const shiftY = dy * pull * 0.03
-        const scale = 1 + energy * 0.055
+        const shiftX = dx * pull * 0.03 * CURSOR_FORCE
+        const shiftY = dy * pull * 0.03 * CURSOR_FORCE
+        const scale = 1 + energy * 0.055 * CURSOR_FORCE
         const w = cell.w * scale
         const h = cell.h * scale
         const x = cell.x - w / 2 + shiftX

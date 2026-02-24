@@ -16,6 +16,7 @@ type AnimationOptionLayoutProps = {
   conceptTitle: string
   conceptCopy: string
   animation: ReactNode
+  swapSides?: boolean
 }
 
 export default function AnimationOptionLayout({
@@ -23,6 +24,7 @@ export default function AnimationOptionLayout({
   conceptTitle,
   conceptCopy,
   animation,
+  swapSides = false,
 }: AnimationOptionLayoutProps) {
   return (
     <main className="min-h-screen overflow-x-hidden bg-white text-[#0f2f68]">
@@ -38,9 +40,9 @@ export default function AnimationOptionLayout({
         />
 
         <div className="relative mx-auto grid min-h-[calc(100vh-9.5rem)] max-w-[94rem] items-center gap-14 px-6 pb-16 sm:px-8 sm:pb-20 lg:grid-cols-[1.2fr_0.96fr] xl:px-10">
-          <div className="h-[340px] w-full sm:h-[440px] lg:h-[520px]">{animation}</div>
+          <div className={`h-[340px] w-full sm:h-[440px] lg:h-[520px] ${swapSides ? 'lg:order-2' : ''}`}>{animation}</div>
 
-          <div>
+          <div className={swapSides ? 'lg:order-1' : ''}>
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-blue-200/82">{optionLabel}</p>
             <h1
               className="mt-5 font-manrope text-[2.7rem] font-extrabold leading-[1.01] tracking-[-0.03em] text-transparent sm:text-[3.55rem] lg:text-[4.2rem]"
@@ -62,12 +64,18 @@ export default function AnimationOptionLayout({
                 href="#"
                 className="inline-flex items-center gap-2 rounded-xl border border-[#f5be68]/35 bg-[#f0a01f] px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#f4ae32]"
               >
+                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                </svg>
                 Book a Demo
               </a>
               <a
                 href="#"
-                className="inline-flex items-center gap-2 rounded-xl border border-[#4f6692] bg-[#31466e] px-5 py-3 text-sm font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#283d64]"
+                className="inline-flex items-center gap-2 rounded-xl bg-[#232833] px-5 py-3 text-sm font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1d222c]"
               >
+                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
                 Explore IDU
               </a>
             </div>

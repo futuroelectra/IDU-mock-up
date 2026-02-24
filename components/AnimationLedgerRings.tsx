@@ -26,6 +26,7 @@ type Token = {
 }
 
 const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value))
+const CURSOR_FORCE = 0.05
 
 export default function AnimationLedgerRings() {
   const wrapperRef = useRef<HTMLDivElement>(null)
@@ -134,8 +135,8 @@ export default function AnimationLedgerRings() {
       const targetY = pointer.active ? pointer.y : idleY
       const lastX = pointer.smoothX
       const lastY = pointer.smoothY
-      pointer.smoothX += (targetX - pointer.smoothX) * 0.07
-      pointer.smoothY += (targetY - pointer.smoothY) * 0.07
+      pointer.smoothX += (targetX - pointer.smoothX) * 0.05
+      pointer.smoothY += (targetY - pointer.smoothY) * 0.05
       pointer.vx = pointer.smoothX - lastX
       pointer.vy = pointer.smoothY - lastY
       const pointerSpeed = Math.hypot(pointer.vx, pointer.vy)
@@ -145,8 +146,8 @@ export default function AnimationLedgerRings() {
 
       rings.forEach((ring, index) => {
         const depthFactor = 1 - index / rings.length
-        const desiredX = (pointer.smoothX - centerX) * 0.08 * depthFactor + Math.cos(time * (0.45 + index * 0.12) + ring.phase) * 4
-        const desiredY = (pointer.smoothY - centerY) * 0.05 * depthFactor + Math.sin(time * (0.42 + index * 0.1) + ring.phase) * 3
+        const desiredX = (pointer.smoothX - centerX) * 0.08 * depthFactor * CURSOR_FORCE + Math.cos(time * (0.45 + index * 0.12) + ring.phase) * 4
+        const desiredY = (pointer.smoothY - centerY) * 0.05 * depthFactor * CURSOR_FORCE + Math.sin(time * (0.42 + index * 0.1) + ring.phase) * 3
         ring.vx += (desiredX - ring.offsetX) * 0.032
         ring.vy += (desiredY - ring.offsetY) * 0.032
         ring.vx *= 0.86
@@ -171,16 +172,16 @@ export default function AnimationLedgerRings() {
         const dist = Math.hypot(dx, dy)
         const influence = clamp(1 - dist / 200, 0, 1)
         if (influence > 0) {
-          const pull = (0.05 + pointerSpeed * 0.42) * influence
+          const pull = (0.05 + pointerSpeed * 0.42) * influence * CURSOR_FORCE
           token.vx += dx * pull * 0.0052
           token.vy += dy * pull * 0.0052
 
-          const swirl = (0.055 + pointerSpeed * 0.5) * influence
+          const swirl = (0.055 + pointerSpeed * 0.5) * influence * CURSOR_FORCE
           token.vx += -dy * swirl * 0.0046
           token.vy += dx * swirl * 0.0046
         }
         if (dist < 98) {
-          const repel = (1 - dist / 98) * (0.24 + token.size * 0.026)
+          const repel = (1 - dist / 98) * (0.24 + token.size * 0.026) * CURSOR_FORCE
           const inv = 1 / (dist + 0.0001)
           token.vx -= dx * inv * repel
           token.vy -= dy * inv * repel

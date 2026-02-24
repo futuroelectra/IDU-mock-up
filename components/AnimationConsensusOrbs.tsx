@@ -16,6 +16,7 @@ type Orb = {
 }
 
 const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value))
+const CURSOR_FORCE = 0.05
 
 export default function AnimationConsensusOrbs() {
   const wrapperRef = useRef<HTMLDivElement>(null)
@@ -128,8 +129,8 @@ export default function AnimationConsensusOrbs() {
       const targetY = pointer.active ? pointer.y : idleY
       const lastX = pointer.smoothX
       const lastY = pointer.smoothY
-      pointer.smoothX += (targetX - pointer.smoothX) * 0.07
-      pointer.smoothY += (targetY - pointer.smoothY) * 0.07
+      pointer.smoothX += (targetX - pointer.smoothX) * 0.05
+      pointer.smoothY += (targetY - pointer.smoothY) * 0.05
       pointer.vx = pointer.smoothX - lastX
       pointer.vy = pointer.smoothY - lastY
       const pointerSpeed = Math.hypot(pointer.vx, pointer.vy)
@@ -165,17 +166,17 @@ export default function AnimationConsensusOrbs() {
         const dist = Math.hypot(dx, dy)
         const influence = clamp(1 - dist / 210, 0, 1)
         if (influence > 0) {
-          const swirl = (0.03 + pointerSpeed * 0.55) * influence
+          const swirl = (0.03 + pointerSpeed * 0.55) * influence * CURSOR_FORCE
           orb.vx += -dy * swirl * 0.005
           orb.vy += dx * swirl * 0.005
 
-          const pull = (0.04 + pointerSpeed * 0.45) * influence
+          const pull = (0.04 + pointerSpeed * 0.45) * influence * CURSOR_FORCE
           orb.vx += (pointer.smoothX - orb.x) * pull * 0.003
           orb.vy += (pointer.smoothY - orb.y) * pull * 0.003
         }
 
         if (dist < 105) {
-          const repel = (1 - dist / 105) * (0.22 + pointerSpeed * 0.35)
+          const repel = (1 - dist / 105) * (0.22 + pointerSpeed * 0.35) * CURSOR_FORCE
           const inv = 1 / (dist + 0.0001)
           orb.vx += dx * inv * repel
           orb.vy += dy * inv * repel

@@ -8,6 +8,7 @@ export default function Page6() {
       conceptTitle="A dynamic allocation orbit where priorities circulate and rebalance."
       conceptCopy="This concept treats planning inputs like moving allocations in orbital tracks. Cursor movement bends orbital centers and reweights flow, expressing how finance can absorb changing business priorities while staying coherent."
       animation={<AnimationLedgerRings />}
+      swapSides
     />
   )
 }

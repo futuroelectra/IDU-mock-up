@@ -21,6 +21,7 @@ type RibbonParticle = {
 }
 
 const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value))
+const CURSOR_FORCE = 0.05
 
 function makeLanes(): Lane[] {
   return [
@@ -133,8 +134,8 @@ export default function AnimationDepartmentFlows() {
       const targetY = pointer.active ? pointer.y : idleY
       const lastX = pointer.smoothX
       const lastY = pointer.smoothY
-      pointer.smoothX += (targetX - pointer.smoothX) * 0.07
-      pointer.smoothY += (targetY - pointer.smoothY) * 0.07
+      pointer.smoothX += (targetX - pointer.smoothX) * 0.05
+      pointer.smoothY += (targetY - pointer.smoothY) * 0.05
       pointer.vx = pointer.smoothX - lastX
       pointer.vy = pointer.smoothY - lastY
       const pointerSpeed = Math.hypot(pointer.vx, pointer.vy)
@@ -145,7 +146,7 @@ export default function AnimationDepartmentFlows() {
           const t = i / 84
           const point = lanePoint(lane, t, time)
           const influence = clamp(1 - Math.hypot(point.x - pointer.smoothX, point.y - pointer.smoothY) / 220, 0, 1)
-          const warp = influence * (7 + pointerSpeed * 22)
+          const warp = influence * CURSOR_FORCE * (7 + pointerSpeed * 22)
           const warpedY = point.y + Math.sin((t + time * 0.2 + lane.phase) * Math.PI * 6) * warp * 0.2
           if (i === 0) {
             context.moveTo(point.x, warpedY)
@@ -177,17 +178,17 @@ export default function AnimationDepartmentFlows() {
         const distance = Math.hypot(dx, dy)
         const influence = clamp(1 - distance / 185, 0, 1)
         if (influence > 0) {
-          const attract = (0.07 + pointerSpeed * 0.55) * influence
+          const attract = (0.07 + pointerSpeed * 0.55) * influence * CURSOR_FORCE
           particle.vx += dx * attract * 0.0062
           particle.vy += dy * attract * 0.0062
 
-          const swirl = (0.12 + pointerSpeed * 0.9) * influence * 0.007
+          const swirl = (0.12 + pointerSpeed * 0.9) * influence * 0.007 * CURSOR_FORCE
           particle.vx += -dy * swirl * 0.008
           particle.vy += dx * swirl * 0.008
         }
 
         if (distance < 90) {
-          const repel = (1 - distance / 90) * (0.34 + particle.size * 0.04)
+          const repel = (1 - distance / 90) * (0.34 + particle.size * 0.04) * CURSOR_FORCE
           const inv = 1 / (distance + 0.0001)
           particle.vx -= dx * inv * repel
           particle.vy -= dy * inv * repel
