@@ -21,7 +21,7 @@ type Pulse = {
 }
 
 const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value))
-const CURSOR_FORCE = 0.05
+const CURSOR_FORCE = 0.1
 
 const roundedRect = (ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) => {
   const radius = Math.min(r, w / 2, h / 2)
