@@ -21,10 +21,10 @@ const createNodes = (width: number, height: number, count: number): Node[] =>
     return {
       x: Math.random() * width,
       y: Math.random() * height,
-      vx: (Math.random() - 0.5) * (0.22 + depth * 0.28),
-      vy: (Math.random() - 0.5) * (0.2 + depth * 0.35),
+      vx: (Math.random() - 0.5) * (0.28 + depth * 0.34),
+      vy: (Math.random() - 0.5) * (0.24 + depth * 0.4),
       depth,
-      radius: 2.6 + depth * 7.6,
+      radius: 2.4 + depth * 8.4,
       phase: Math.random() * Math.PI * 2,
       drift: 0.35 + Math.random() * 0.9,
     }
@@ -71,7 +71,7 @@ export default function CursorNetworkPanel() {
       canvas.style.height = `${height}px`
       context.setTransform(dpr, 0, 0, dpr, 0, 0)
 
-      const nodeCount = clamp(Math.round((width * height) / 10800), 42, 92)
+      const nodeCount = clamp(Math.round((width * height) / 9300), 56, 120)
       nodes = createNodes(width, height, nodeCount)
 
       pointer.x = width * 0.62
@@ -108,21 +108,21 @@ export default function CursorNetworkPanel() {
       pointer.smoothX += (targetX - pointer.smoothX) * 0.07
       pointer.smoothY += (targetY - pointer.smoothY) * 0.07
 
-      const maxDistance = clamp(width * 0.16, 72, 124)
+      const maxDistance = clamp(width * 0.2, 92, 148)
 
       for (let i = 0; i < nodes.length; i += 1) {
         const node = nodes[i]
-        const streamDriftX = Math.cos(time * node.drift + node.phase) * 0.15
-        const streamDriftY = Math.sin(time * (node.drift + 0.2) + node.phase) * 0.16
+        const streamDriftX = Math.cos(time * node.drift + node.phase) * 0.2
+        const streamDriftY = Math.sin(time * (node.drift + 0.2) + node.phase) * 0.22
         node.x += node.vx + streamDriftX
         node.y += node.vy + streamDriftY
 
         const dx = pointer.smoothX - node.x
         const dy = pointer.smoothY - node.y
         const pointerDistance = Math.hypot(dx, dy)
-        const influence = clamp(1 - pointerDistance / 210, 0, 1)
+        const influence = clamp(1 - pointerDistance / 250, 0, 1)
         if (influence > 0) {
-          const tension = (node.depth * 0.0025 + 0.0012) * influence
+          const tension = (node.depth * 0.0034 + 0.0018) * influence
           node.x += dx * tension
           node.y += dy * tension
         }
@@ -145,10 +145,10 @@ export default function CursorNetworkPanel() {
           }
 
           const strength = 1 - distance / maxDistance
-          const alpha = (0.05 + ((a.depth + b.depth) * 0.5) * 0.11) * strength
+          const alpha = (0.08 + ((a.depth + b.depth) * 0.5) * 0.14) * strength
           context.beginPath()
           context.strokeStyle = `rgba(241, 245, 252, ${alpha})`
-          context.lineWidth = 0.6 + strength * 1.1
+          context.lineWidth = 0.7 + strength * 1.25
           context.moveTo(a.x, a.y)
           context.lineTo(b.x, b.y)
           context.stroke()

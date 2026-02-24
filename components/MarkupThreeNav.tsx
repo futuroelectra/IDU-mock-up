@@ -12,8 +12,6 @@ type MenuColumn = {
 type MenuItem = {
   label: string
   columns: MenuColumn[]
-  teaserTitle: string
-  teaserCopy: string
 }
 
 const basePath = process.env.NODE_ENV === 'production' ? '/IDU-mock-up' : ''
@@ -26,8 +24,6 @@ const menuItems: MenuItem[] = [
       { title: 'Optimize', links: ['Cash Flow', 'Workforce Planning', 'Capex Planning'] },
       { title: 'Coordinate', links: ['Department Alignment', 'Project Visibility', 'Risk Signals'] },
     ],
-    teaserTitle: 'Make Every Number Actionable',
-    teaserCopy: 'Move from annual budgets to continuous planning with faster, trusted decision loops.',
   },
   {
     label: 'Platform',
@@ -36,8 +32,6 @@ const menuItems: MenuItem[] = [
       { title: 'Trust', links: ['Security Controls', 'Role Permissions', 'Audit Trails'] },
       { title: 'Connect', links: ['ERP Integrations', 'Data Connectors', 'Open APIs'] },
     ],
-    teaserTitle: 'Enterprise Foundation',
-    teaserCopy: 'Built for multi-entity complexity without sacrificing speed, clarity, or adoption.',
   },
   {
     label: 'Customers',
@@ -46,8 +40,6 @@ const menuItems: MenuItem[] = [
       { title: 'Stories', links: ['Transformation Journeys', 'Global Rollouts', 'Operational Wins'] },
       { title: 'Outcomes', links: ['Faster Planning Cycles', 'Higher Forecast Accuracy', 'Stronger Ownership'] },
     ],
-    teaserTitle: 'Proven in Real Operations',
-    teaserCopy: 'Teams across regions and business units run cleaner planning with less friction.',
   },
   {
     label: 'Resources',
@@ -56,8 +48,6 @@ const menuItems: MenuItem[] = [
       { title: 'Explore', links: ['Webinars', 'Benchmark Reports', 'Use-Case Library'] },
       { title: 'Support', links: ['Documentation', 'Implementation Paths', 'Best Practices'] },
     ],
-    teaserTitle: 'Knowledge for Finance Leaders',
-    teaserCopy: 'Practical frameworks and templates your teams can apply immediately.',
   },
   {
     label: 'Partners',
@@ -66,8 +56,6 @@ const menuItems: MenuItem[] = [
       { title: 'Programs', links: ['Partner Enablement', 'Co-Sell Motion', 'Certification'] },
       { title: 'Grow', links: ['Market Expansion', 'Joint Value Propositions', 'Success Planning'] },
     ],
-    teaserTitle: 'Built for Collaboration',
-    teaserCopy: 'Work with a partner ecosystem designed to scale adoption and business impact.',
   },
   {
     label: 'About',
@@ -76,8 +64,6 @@ const menuItems: MenuItem[] = [
       { title: 'News', links: ['Announcements', 'Events', 'Press Resources'] },
       { title: 'Careers', links: ['Open Roles', 'Hiring Process', 'Life at IDU'] },
     ],
-    teaserTitle: 'People Behind the Product',
-    teaserCopy: 'A team focused on helping organizations build confidence in every planning decision.',
   },
 ]
 
@@ -208,24 +194,24 @@ export default function MarkupThreeNav() {
                   </button>
 
                   {isOpen && (
-                    <div className="absolute left-1/2 top-full w-[min(96vw,1060px)] -translate-x-1/2 pt-3">
+                    <div className="absolute left-1/2 top-full w-[min(96vw,920px)] -translate-x-1/2 pt-3">
                       <div
                         className={`rounded-3xl border p-4 backdrop-blur-2xl ${
-                          lightMode ? 'border-[#d4e3fb]' : 'border-white/16'
+                          lightMode ? 'border-[#d4e3fb]' : 'border-white/24'
                         }`}
                         style={dropdownStyle}
                       >
-                        <div className="grid grid-cols-[1fr_1fr_1fr_320px] gap-3">
+                        <div className="grid grid-cols-3 gap-3">
                           {item.columns.map((column) => (
                             <div
                               key={column.title}
                               className={`rounded-2xl border p-4 ${
-                                lightMode ? 'border-[#d8e6fd] bg-[#f6faff]' : 'border-white/10 bg-white/[0.04]'
+                                lightMode ? 'border-[#d8e6fd] bg-[#f6faff]' : 'border-white/14 bg-[#0d2255]/72'
                               }`}
                             >
                               <p
                                 className={`text-[11px] font-semibold uppercase tracking-[0.2em] ${
-                                  lightMode ? 'text-[#2f5ea8]' : 'text-sky-200/80'
+                                  lightMode ? 'text-[#2f5ea8]' : 'text-blue-100/92'
                                 }`}
                               >
                                 {column.title}
@@ -238,7 +224,7 @@ export default function MarkupThreeNav() {
                                       className={`block rounded-lg px-2 py-1.5 text-sm transition-colors ${
                                         lightMode
                                           ? 'text-[#1d3e75] hover:bg-[#e8f2ff]'
-                                          : 'text-white/84 hover:bg-white/10 hover:text-white'
+                                          : 'text-white/90 hover:bg-white/12 hover:text-white'
                                       }`}
                                     >
                                       {link}
@@ -248,43 +234,6 @@ export default function MarkupThreeNav() {
                               </ul>
                             </div>
                           ))}
-                          <aside
-                            className={`flex h-full flex-col justify-between rounded-2xl border p-5 ${
-                              lightMode
-                                ? 'border-[#d9e7fc] bg-gradient-to-br from-[#edf5ff] via-white to-[#f5f9ff]'
-                                : 'border-white/12 bg-gradient-to-br from-sky-300/18 via-white/8 to-white/[0.02]'
-                            }`}
-                          >
-                            <div>
-                              <p
-                                className={`text-xs font-semibold uppercase tracking-[0.22em] ${
-                                  lightMode ? 'text-[#3d67ab]' : 'text-sky-100/75'
-                                }`}
-                              >
-                                Overview
-                              </p>
-                              <h3
-                                className={`mt-3 font-manrope text-xl font-semibold leading-tight ${
-                                  lightMode ? 'text-[#0b2555]' : 'text-white'
-                                }`}
-                              >
-                                {item.teaserTitle}
-                              </h3>
-                              <p className={`mt-3 text-sm leading-relaxed ${lightMode ? 'text-[#35538a]' : 'text-white/72'}`}>
-                                {item.teaserCopy}
-                              </p>
-                            </div>
-                            <Link
-                              href="#"
-                              className={`mt-5 inline-flex w-fit items-center rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${
-                                lightMode
-                                  ? 'border border-[#c4d8fa] bg-white text-[#123a79] hover:bg-[#eef5ff]'
-                                  : 'border border-white/30 bg-white/12 text-white hover:bg-white/20'
-                              }`}
-                            >
-                              Explore
-                            </Link>
-                          </aside>
                         </div>
                       </div>
                     </div>
@@ -297,7 +246,11 @@ export default function MarkupThreeNav() {
           <div className="ml-auto flex h-full w-44 items-center justify-end pr-2">
             <Link
               href="#"
-              className="inline-flex shrink-0 items-center rounded-full border border-[#f4a424]/40 bg-[#f0a01f] px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#f3ab30]"
+              className={`inline-flex shrink-0 items-center rounded-full px-5 py-2 text-sm font-semibold transition-colors ${
+                lightMode
+                  ? 'border border-[#19498f] bg-[#123f84] text-white hover:bg-[#0f3876]'
+                  : 'border border-black/15 bg-white text-[#0f2f68] hover:bg-white/92'
+              }`}
             >
               CTA
             </Link>

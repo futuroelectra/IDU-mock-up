@@ -52,12 +52,16 @@ const proofStats = [
   { value: '99%', label: 'Decision traceability' },
 ]
 
+const footerTopGroups = megaMenuData.filter((item) => item.label !== 'Solutions')
+const solutionsItem = megaMenuData.find((item) => item.label === 'Solutions')
+const solutionsLinks = solutionsItem ? solutionsItem.groups.flatMap((group) => group.links) : []
+
 export default function Page3() {
   return (
     <main className="min-h-screen overflow-x-hidden bg-white text-[#0f2f68]">
       <MarkupThreeNav />
 
-      <section className="relative overflow-hidden bg-[#050221] pb-32 pt-36 text-white sm:pt-40">
+      <section className="relative overflow-hidden bg-[#050221] pb-44 pt-36 text-white sm:pb-52 sm:pt-40">
         <div
           className="pointer-events-none absolute inset-0"
           style={{
@@ -120,10 +124,16 @@ export default function Page3() {
           </div>
         </div>
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-white/0 to-white" />
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-44"
+          style={{
+            background:
+              'linear-gradient(180deg, rgba(7,2,45,0) 0%, rgba(15,31,79,0.44) 42%, rgba(180,203,240,0.46) 72%, rgba(255,255,255,1) 100%)',
+          }}
+        />
       </section>
 
-      <section id="nav-light-start" className="bg-white px-6 pb-24 pt-20 sm:px-8 xl:px-10">
+      <section id="nav-light-start" className="bg-white px-6 pb-24 pt-10 sm:px-8 xl:px-10">
         <div className="mx-auto max-w-[94rem] rounded-[2.1rem] border border-[#d7e4fb] bg-gradient-to-r from-white via-[#f8fbff] to-[#f6faff] p-8 shadow-[0_34px_70px_-56px_rgba(28,76,152,0.45)] sm:p-10">
           <div className="grid gap-8 lg:grid-cols-[1.06fr_1fr] lg:items-end">
             <div>
@@ -189,7 +199,7 @@ export default function Page3() {
                   key={step}
                   className="flex items-start gap-4 rounded-xl border border-[#dfeaff] bg-white p-4 transition-colors hover:border-[#9ec2ff]"
                 >
-                  <span className="mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#f0a01f] text-xs font-semibold text-white">
+                  <span className="mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#0f3f88] text-xs font-semibold text-white">
                     {index + 1}
                   </span>
                   <p className="text-sm leading-relaxed text-[#2f4f86]">{step}</p>
@@ -201,7 +211,7 @@ export default function Page3() {
       </section>
 
       <section className="bg-[#071d49] px-6 py-20 text-white sm:px-8 xl:px-10">
-        <div className="mx-auto grid max-w-[94rem] gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+        <div className="mx-auto max-w-[94rem]">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-blue-100/72">Enterprise Proof</p>
             <blockquote className="mt-4 max-w-4xl font-manrope text-2xl font-medium leading-snug sm:text-3xl">
@@ -210,12 +220,6 @@ export default function Page3() {
             </blockquote>
             <p className="mt-4 text-sm text-blue-100/72">Finance Director, Multi-Entity Services Group</p>
           </div>
-          <Link
-            href="#"
-            className="inline-flex h-fit items-center rounded-full border border-[#f4b763]/35 bg-[#f0a01f] px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#f4ae32]"
-          >
-            Start Your Evaluation
-          </Link>
         </div>
       </section>
 
@@ -234,14 +238,14 @@ export default function Page3() {
             </Link>
             <Link
               href="#"
-              className="inline-flex w-fit items-center rounded-full border border-[#f5be68]/40 bg-[#f0a01f] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#f4ae32]"
+              className="inline-flex w-fit items-center rounded-full border border-[#1d4f97] bg-[#113d7f] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0f356f]"
             >
               Partner with IDU
             </Link>
           </div>
 
-          <nav className="grid grid-cols-2 gap-x-8 gap-y-10 pb-10 pt-10 md:grid-cols-5" aria-label="Site map">
-            {megaMenuData.map((item) => (
+          <nav className="grid grid-cols-2 gap-x-8 gap-y-10 pb-10 pt-10 md:grid-cols-4" aria-label="Site map">
+            {footerTopGroups.map((item) => (
               <div key={item.label}>
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#0f2f68]">{item.label}</p>
                 <ul className="mt-4 space-y-4">
@@ -263,6 +267,23 @@ export default function Page3() {
               </div>
             ))}
           </nav>
+
+          {solutionsItem && (
+            <section className="border-t border-[#e5efff] pb-10 pt-8">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#0f2f68]">{solutionsItem.label}</p>
+              <div className="mt-4 flex flex-wrap gap-2.5">
+                {solutionsLinks.map((link) => (
+                  <Link
+                    key={link.label}
+                    href={link.href ?? '#'}
+                    className="rounded-full border border-[#d7e6ff] bg-[#f7faff] px-3.5 py-1.5 text-sm text-[#2d4e86] transition-colors hover:border-[#abc8f8] hover:text-[#0f2f68]"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
 
           <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[#e5efff] pt-6">
             <p className="text-xs text-[#5a78ad]">© {new Date().getFullYear()} IDU. All rights reserved.</p>
