@@ -69,9 +69,13 @@ export default function Page3() {
 
       <MarkupThreeNav />
 
-      <section className="mx-auto flex min-h-[calc(100vh-3.5rem)] max-w-6xl items-center px-6 pb-20 pt-36 sm:pt-40">
-        <div className="grid w-full gap-10 md:grid-cols-[1.06fr_1fr] md:items-center">
-          <div>
+      <section className="mx-auto flex min-h-[calc(100vh-3.5rem)] max-w-[88rem] items-center px-6 pb-20 pt-36 sm:px-8 sm:pt-40 xl:px-10">
+        <div className="grid w-full gap-12 md:grid-cols-[1.08fr_0.92fr] md:items-center">
+          <div className="mx-auto h-[320px] w-full max-w-[760px] sm:h-[420px] lg:h-[500px]">
+            <CursorNetworkPanel />
+          </div>
+
+          <div className="md:pl-3">
             <h1
               className="font-manrope text-[2.65rem] font-extrabold leading-[1.02] tracking-[-0.03em] text-transparent sm:text-[3.35rem] lg:text-[4rem]"
               style={{
@@ -108,15 +112,11 @@ export default function Page3() {
               </a>
             </div>
           </div>
-
-          <div className="mx-auto h-[320px] w-full max-w-[620px] sm:h-[390px] lg:h-[440px]">
-            <CursorNetworkPanel />
-          </div>
         </div>
       </section>
 
       <section className="px-6 pb-24 pt-12 text-white">
-        <div className="mx-auto max-w-6xl rounded-[2rem] border border-white/16 bg-white/[0.045] p-8 backdrop-blur-xl sm:p-10">
+        <div className="mx-auto max-w-[88rem] rounded-[2rem] border border-white/16 bg-white/[0.045] p-8 backdrop-blur-xl sm:p-10 xl:px-12">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-blue-100/70">Planning Reinvented</p>
           <div className="mt-5 grid gap-6 md:grid-cols-[1.1fr_1fr] md:items-end">
             <h2 className="font-manrope text-3xl font-semibold leading-tight text-white sm:text-4xl">
@@ -141,7 +141,7 @@ export default function Page3() {
       </section>
 
       <section className="bg-[#f6f9ff] px-6 py-24 text-[#102a58]">
-        <div className="mx-auto max-w-6xl">
+        <div className="mx-auto max-w-[88rem] xl:px-4">
           <div className="max-w-3xl">
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#2b65bf]">Core Capabilities</p>
             <h2 className="mt-4 font-manrope text-3xl font-semibold leading-tight text-[#081c43] sm:text-4xl">
@@ -164,7 +164,7 @@ export default function Page3() {
       </section>
 
       <section className="bg-white px-6 pb-24 text-[#102a58]">
-        <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2">
+        <div className="mx-auto grid max-w-[88rem] gap-6 md:grid-cols-2 xl:px-4">
           {roleCards.map((role) => (
             <article
               key={role.title}
@@ -179,7 +179,7 @@ export default function Page3() {
       </section>
 
       <section className="bg-[#eef4ff] px-6 py-24 text-[#102a58]">
-        <div className="mx-auto max-w-6xl">
+        <div className="mx-auto max-w-[88rem] xl:px-4">
           <div className="rounded-[2rem] border border-[#d3e3ff] bg-white p-8 sm:p-10">
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#2b65bf]">Execution Loop</p>
             <h2 className="mt-4 max-w-3xl font-manrope text-3xl font-semibold leading-tight text-[#081c43] sm:text-4xl">
@@ -201,7 +201,7 @@ export default function Page3() {
       </section>
 
       <section className="bg-white px-6 pb-24 text-[#102a58]">
-        <div className="mx-auto max-w-6xl rounded-[2rem] border border-[#d8e6ff] bg-gradient-to-r from-[#071c45] via-[#11306b] to-[#1c4a98] p-9 text-white sm:p-12">
+        <div className="mx-auto max-w-[88rem] rounded-[2rem] border border-[#d8e6ff] bg-gradient-to-r from-[#071c45] via-[#11306b] to-[#1c4a98] p-9 text-white sm:p-12 xl:px-14">
           <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/72">Enterprise Feedback</p>
