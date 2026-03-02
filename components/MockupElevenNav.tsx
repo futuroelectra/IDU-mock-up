@@ -8,6 +8,7 @@ import { megaMenuData } from './navMenuData'
 
 export default function MockupElevenNav() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const menuItems = [...megaMenuData].reverse()
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6" onMouseLeave={() => setOpenIndex(null)}>
@@ -17,7 +18,7 @@ export default function MockupElevenNav() {
         </Link>
 
         <div className="relative mx-auto hidden items-center gap-1 lg:flex">
-          {megaMenuData.map((item, index) => {
+          {menuItems.map((item, index) => {
             const isOpen = openIndex === index
             return (
               <div key={item.label} className="relative" onMouseEnter={() => setOpenIndex(index)}>
@@ -30,9 +31,9 @@ export default function MockupElevenNav() {
                 </button>
 
                 {isOpen && (
-                  <div className="absolute left-1/2 top-full w-[min(95vw,980px)] -translate-x-1/2 pt-3">
-                    <div className="rounded-3xl border border-[#dce6f6] bg-white p-4 shadow-[0_24px_60px_-42px_rgba(15,23,42,0.38)]">
-                      <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+                  <div className="absolute left-1/2 top-full w-[min(96vw,1120px)] -translate-x-1/2 pt-3">
+                    <div className="max-h-[68vh] overflow-auto rounded-3xl border border-[#dce6f6] bg-white p-4 shadow-[0_24px_60px_-42px_rgba(15,23,42,0.38)]">
+                      <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                         {item.groups.map((group) => (
                           <div key={group.title} className="rounded-2xl border border-[#e5ecf7] bg-[#f8fafc] p-4">
                             <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#64748B]">{group.title}</p>
@@ -41,7 +42,7 @@ export default function MockupElevenNav() {
                                 <li key={link.label}>
                                   <Link
                                     href={link.href ?? '#'}
-                                    className="block rounded-lg px-2 py-1.5 text-sm text-[#1C1F5E] transition-colors hover:bg-white hover:text-[#0F172A]"
+                                    className="block rounded-lg px-2 py-1.5 text-sm leading-relaxed text-[#1C1F5E] transition-colors hover:bg-white hover:text-[#0F172A]"
                                   >
                                     {link.label}
                                   </Link>

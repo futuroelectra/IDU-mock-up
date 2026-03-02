@@ -87,8 +87,8 @@ export default function Page11() {
     <main style={{ backgroundColor: palette.surface, color: palette.ink }} className="min-h-screen overflow-x-hidden">
       <MockupElevenNav />
 
-      <section className="px-8 pb-30 pt-40 sm:px-12 sm:pt-44 xl:px-20">
-        <div className="mx-auto grid min-h-[calc(100vh-8rem)] max-w-[94rem] items-center gap-14 lg:grid-cols-[1.04fr_0.96fr] xl:gap-18">
+      <section className="px-8 pb-24 pt-28 sm:px-12 sm:pt-32 xl:px-20">
+        <div className="mx-auto grid min-h-[calc(100vh-11rem)] max-w-[94rem] items-center gap-14 lg:grid-cols-[1.04fr_0.96fr] xl:gap-18">
           <div className="relative h-[340px] sm:h-[440px] lg:h-[540px]">
             <div className="absolute inset-0 [mask-image:radial-gradient(128%_112%_at_50%_50%,black_60%,transparent_100%)] [-webkit-mask-image:radial-gradient(128%_112%_at_50%_50%,black_60%,transparent_100%)]">
               <AnimationDepartmentFlowsSlate />
