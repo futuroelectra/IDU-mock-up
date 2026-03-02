@@ -119,19 +119,25 @@ export default function Page11() {
         </nav>
       </header>
 
-      <section className="px-6 pb-28 pt-36 sm:px-10 sm:pt-40 xl:px-14">
-        <div className="mx-auto grid min-h-[calc(100vh-9rem)] max-w-[92rem] items-center gap-16 lg:grid-cols-[0.96fr_1.04fr]">
-          <div>
+      <section className="px-8 pb-32 pt-40 sm:px-12 sm:pt-44 xl:px-20">
+        <div className="mx-auto grid min-h-[calc(100vh-8rem)] max-w-[96rem] items-center gap-20 lg:grid-cols-[1.08fr_0.78fr] xl:gap-28">
+          <div className="relative h-[400px] sm:h-[520px] lg:h-[620px]">
+            <div className="absolute inset-0 [mask-image:radial-gradient(128%_112%_at_50%_50%,black_60%,transparent_100%)] [-webkit-mask-image:radial-gradient(128%_112%_at_50%_50%,black_60%,transparent_100%)]">
+              <AnimationDepartmentFlowsSlate />
+            </div>
+          </div>
+
+          <div className="lg:pl-6 xl:pl-10">
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#64748B]">Mockup 11: Slate Flow System</p>
-            <h1 className="mt-6 font-manrope text-[2.8rem] font-extrabold leading-[1.01] tracking-[-0.03em] text-[#1C1F5E] sm:text-[3.7rem] lg:text-[4.5rem]">
+            <h1 className="mt-6 max-w-lg font-manrope text-[2.4rem] font-extrabold leading-[1.04] tracking-[-0.028em] text-[#1C1F5E] sm:text-[3rem] lg:text-[3.5rem]">
               Finance in Focus for teams that plan in motion.
             </h1>
-            <p className="mt-7 max-w-xl text-lg leading-relaxed text-[#64748B]">
+            <p className="mt-7 max-w-md text-base leading-relaxed text-[#64748B]">
               Africa&apos;s leading financial planning solution. Trusted by global enterprises across Africa, Europe,
               the Middle East, and North America.
             </p>
 
-            <div className="mt-12 flex flex-wrap gap-3">
+            <div className="mt-11 flex flex-wrap gap-3">
               <a
                 href="#"
                 className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5"
@@ -147,12 +153,6 @@ export default function Page11() {
                 <Sparkle size={16} weight="bold" />
                 Explore IDU
               </a>
-            </div>
-          </div>
-
-          <div className="relative h-[380px] sm:h-[480px] lg:h-[580px]">
-            <div className="absolute inset-0 [mask-image:radial-gradient(128%_112%_at_50%_50%,black_60%,transparent_100%)] [-webkit-mask-image:radial-gradient(128%_112%_at_50%_50%,black_60%,transparent_100%)]">
-              <AnimationDepartmentFlowsSlate />
             </div>
           </div>
         </div>
