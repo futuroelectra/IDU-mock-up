@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import IDULogoMark from '@/components/IDULogoMark'
-import AnimationDepartmentFlowsSlate from '@/components/AnimationDepartmentFlowsSlate'
+import AnimationFinanceFocusLens from '@/components/AnimationFinanceFocusLens'
 import MockupElevenNav from '@/components/MockupElevenNav'
 import { megaMenuData } from '@/components/navMenuData'
 import {
@@ -91,7 +91,7 @@ export default function Page11() {
         <div className="mx-auto grid min-h-[calc(100vh-11rem)] max-w-[94rem] items-center gap-14 lg:grid-cols-[1.04fr_0.96fr] xl:gap-18">
           <div className="relative h-[340px] sm:h-[440px] lg:h-[540px]">
             <div className="absolute inset-0 [mask-image:radial-gradient(128%_112%_at_50%_50%,black_60%,transparent_100%)] [-webkit-mask-image:radial-gradient(128%_112%_at_50%_50%,black_60%,transparent_100%)]">
-              <AnimationDepartmentFlowsSlate />
+              <AnimationFinanceFocusLens />
             </div>
           </div>
 
@@ -103,6 +103,10 @@ export default function Page11() {
             <p className="mt-7 max-w-[36rem] text-[1.02rem] leading-relaxed text-[#64748B]">
               Africa&apos;s leading financial planning solution. Trusted by global enterprises across Africa, Europe,
               the Middle East, and North America.
+            </p>
+
+            <p className="mt-5 max-w-[33rem] text-sm leading-relaxed text-[#64748B]/90">
+              Hover to inspect service bubbles. Click a bubble to pin its focus label.
             </p>
 
             <div className="mt-11 flex flex-wrap gap-3">
