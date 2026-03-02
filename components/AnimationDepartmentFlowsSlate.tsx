@@ -21,7 +21,7 @@ type RibbonParticle = {
 }
 
 const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value))
-const CURSOR_FORCE = 0.18
+const CURSOR_FORCE = 0.3
 
 function makeLanes(): Lane[] {
   return [
@@ -134,8 +134,8 @@ export default function AnimationDepartmentFlowsSlate() {
       const targetY = pointer.active ? pointer.y : idleY
       const lastX = pointer.smoothX
       const lastY = pointer.smoothY
-      pointer.smoothX += (targetX - pointer.smoothX) * 0.052
-      pointer.smoothY += (targetY - pointer.smoothY) * 0.052
+      pointer.smoothX += (targetX - pointer.smoothX) * 0.078
+      pointer.smoothY += (targetY - pointer.smoothY) * 0.078
       pointer.vx = pointer.smoothX - lastX
       pointer.vy = pointer.smoothY - lastY
       const pointerSpeed = Math.hypot(pointer.vx, pointer.vy)
@@ -145,8 +145,8 @@ export default function AnimationDepartmentFlowsSlate() {
         for (let i = 0; i <= 84; i += 1) {
           const t = i / 84
           const point = lanePoint(lane, t, time)
-          const influence = clamp(1 - Math.hypot(point.x - pointer.smoothX, point.y - pointer.smoothY) / 210, 0, 1)
-          const warp = influence * CURSOR_FORCE * (7 + pointerSpeed * 18)
+          const influence = clamp(1 - Math.hypot(point.x - pointer.smoothX, point.y - pointer.smoothY) / 224, 0, 1)
+          const warp = influence * CURSOR_FORCE * (8 + pointerSpeed * 22)
           const warpedY = point.y + Math.sin((t + time * 0.2 + lane.phase) * Math.PI * 6) * warp * 0.17
           if (i === 0) {
             context.moveTo(point.x, warpedY)
@@ -154,8 +154,8 @@ export default function AnimationDepartmentFlowsSlate() {
             context.lineTo(point.x, warpedY)
           }
         }
-        context.strokeStyle = `rgba(28, 31, 94, ${0.1 + laneIndex * 0.05})`
-        context.lineWidth = 1.25
+        context.strokeStyle = `rgba(59, 130, 246, ${0.14 + laneIndex * 0.06})`
+        context.lineWidth = 1.35
         context.stroke()
       })
 
@@ -176,27 +176,27 @@ export default function AnimationDepartmentFlowsSlate() {
         const dx = pointer.smoothX - px
         const dy = pointer.smoothY - py
         const distance = Math.hypot(dx, dy)
-        const influence = clamp(1 - distance / 182, 0, 1)
+        const influence = clamp(1 - distance / 196, 0, 1)
 
         if (influence > 0) {
-          const attract = (0.07 + pointerSpeed * 0.52) * influence * CURSOR_FORCE
-          particle.vx += dx * attract * 0.006
-          particle.vy += dy * attract * 0.006
+          const attract = (0.09 + pointerSpeed * 0.66) * influence * CURSOR_FORCE
+          particle.vx += dx * attract * 0.0068
+          particle.vy += dy * attract * 0.0068
 
-          const swirl = (0.11 + pointerSpeed * 0.78) * influence * CURSOR_FORCE
-          particle.vx += -dy * swirl * 0.0048
-          particle.vy += dx * swirl * 0.0048
+          const swirl = (0.13 + pointerSpeed * 0.92) * influence * CURSOR_FORCE
+          particle.vx += -dy * swirl * 0.0054
+          particle.vy += dx * swirl * 0.0054
         }
 
         if (distance < 92) {
-          const repel = (1 - distance / 92) * (0.23 + particle.size * 0.03) * CURSOR_FORCE
+          const repel = (1 - distance / 92) * (0.27 + particle.size * 0.034) * CURSOR_FORCE
           const inv = 1 / (distance + 0.0001)
           particle.vx -= dx * inv * repel
           particle.vy -= dy * inv * repel
         }
 
-        particle.vx *= 0.905
-        particle.vy *= 0.905
+        particle.vx *= 0.895
+        particle.vy *= 0.895
         particle.offsetX += particle.vx
         particle.offsetY += particle.vy
 
@@ -205,15 +205,15 @@ export default function AnimationDepartmentFlowsSlate() {
         const radius = particle.size
 
         context.beginPath()
-        context.fillStyle = `rgba(100, 116, 139, ${0.12 + radius * 0.01})`
+        context.fillStyle = `rgba(37, 99, 235, ${0.12 + radius * 0.012})`
         context.ellipse(x + radius * 0.26, y + radius * 0.46, radius * 0.88, radius * 0.56, 0, 0, Math.PI * 2)
         context.fill()
 
         const pearl = context.createRadialGradient(x - radius * 0.36, y - radius * 0.38, 0, x, y, radius * 1.2)
         pearl.addColorStop(0, 'rgba(255,255,255,0.99)')
-        pearl.addColorStop(0.33, 'rgba(248,250,252,0.97)')
-        pearl.addColorStop(0.72, 'rgba(225,232,241,0.9)')
-        pearl.addColorStop(1, 'rgba(175,188,205,0.8)')
+        pearl.addColorStop(0.33, 'rgba(241,248,255,0.97)')
+        pearl.addColorStop(0.72, 'rgba(200,224,255,0.9)')
+        pearl.addColorStop(1, 'rgba(138,180,242,0.82)')
 
         context.beginPath()
         context.fillStyle = pearl
@@ -221,9 +221,17 @@ export default function AnimationDepartmentFlowsSlate() {
         context.fill()
 
         if ((particle.laneIndex + Math.floor(time * 2)) % 5 === 0) {
+          const accentGlow = context.createRadialGradient(x, y, 0, x, y, radius * 1.9)
+          accentGlow.addColorStop(0, 'rgba(255,77,0,0.12)')
+          accentGlow.addColorStop(1, 'rgba(255,77,0,0)')
           context.beginPath()
-          context.fillStyle = 'rgba(255,77,0,0.18)'
-          context.arc(x - radius * 0.18, y - radius * 0.22, Math.max(1.2, radius * 0.22), 0, Math.PI * 2)
+          context.fillStyle = accentGlow
+          context.arc(x, y, radius * 1.9, 0, Math.PI * 2)
+          context.fill()
+
+          context.beginPath()
+          context.fillStyle = 'rgba(255,77,0,0.16)'
+          context.arc(x - radius * 0.18, y - radius * 0.22, Math.max(1.1, radius * 0.2), 0, Math.PI * 2)
           context.fill()
         }
       })
