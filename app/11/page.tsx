@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import IDULogoMark from '@/components/IDULogoMark'
 import AnimationDepartmentFlowsSlate from '@/components/AnimationDepartmentFlowsSlate'
+import MockupElevenNav from '@/components/MockupElevenNav'
+import { megaMenuData } from '@/components/navMenuData'
 import {
   ArrowRight,
   ArrowUpRight,
@@ -21,8 +23,6 @@ const palette = {
   detail: '#FFFFFF',
   ink: '#0F172A',
 }
-
-const navItems = ['Solutions', 'Platform', 'Customers', 'Resources', 'Partners', 'About']
 
 const featureCards = [
   {
@@ -66,6 +66,9 @@ const workflow = [
 ]
 
 const trustRows = ['MTN Group', 'Absa', 'Nedbank', 'Sasol', 'Vodacom', 'Aspen', 'Axian', 'Astra Tech']
+const footerTopGroups = megaMenuData.filter((item) => item.label !== 'Solutions')
+const solutionsItem = megaMenuData.find((item) => item.label === 'Solutions')
+const solutionsLinks = solutionsItem ? solutionsItem.groups.flatMap((group) => group.links) : []
 
 function MockImage({ label, className = '' }: { label: string; className?: string }) {
   return (
@@ -82,57 +85,22 @@ function MockImage({ label, className = '' }: { label: string; className?: strin
 export default function Page11() {
   return (
     <main style={{ backgroundColor: palette.surface, color: palette.ink }} className="min-h-screen overflow-x-hidden">
-      <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6">
-        <nav className="mx-auto flex h-16 w-full max-w-[92rem] items-center rounded-full border border-[#e2e8f0] bg-white/88 px-3 backdrop-blur-xl">
-          <Link href="/" className="ml-2 flex items-center text-[#1C1F5E]">
-            <IDULogoMark className="h-7 w-auto" />
-          </Link>
+      <MockupElevenNav />
 
-          <div className="mx-auto hidden items-center gap-1 lg:flex">
-            {navItems.map((item) => (
-              <button
-                key={item}
-                type="button"
-                className="rounded-full px-3 py-2 text-sm font-medium text-[#1C1F5E]/85 transition-colors hover:bg-[#eef2f9] hover:text-[#0F172A]"
-              >
-                {item}
-              </button>
-            ))}
-          </div>
-
-          <div className="ml-auto flex items-center gap-2 pr-1">
-            <Link
-              href="/4"
-              className="hidden rounded-full border border-[#d5dcec] px-4 py-2 text-sm font-medium text-[#1C1F5E] transition-colors hover:bg-[#f1f4fa] sm:inline-flex"
-            >
-              Mockup 4
-            </Link>
-            <Link
-              href="#"
-              className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold text-white transition-colors hover:opacity-95"
-              style={{ backgroundColor: palette.primary }}
-            >
-              Book a Demo
-              <ArrowUpRight size={16} weight="bold" />
-            </Link>
-          </div>
-        </nav>
-      </header>
-
-      <section className="px-8 pb-32 pt-40 sm:px-12 sm:pt-44 xl:px-20">
-        <div className="mx-auto grid min-h-[calc(100vh-8rem)] max-w-[96rem] items-center gap-20 lg:grid-cols-[1.08fr_0.78fr] xl:gap-28">
-          <div className="relative h-[400px] sm:h-[520px] lg:h-[620px]">
+      <section className="px-8 pb-30 pt-40 sm:px-12 sm:pt-44 xl:px-20">
+        <div className="mx-auto grid min-h-[calc(100vh-8rem)] max-w-[94rem] items-center gap-14 lg:grid-cols-[1.04fr_0.96fr] xl:gap-18">
+          <div className="relative h-[340px] sm:h-[440px] lg:h-[540px]">
             <div className="absolute inset-0 [mask-image:radial-gradient(128%_112%_at_50%_50%,black_60%,transparent_100%)] [-webkit-mask-image:radial-gradient(128%_112%_at_50%_50%,black_60%,transparent_100%)]">
               <AnimationDepartmentFlowsSlate />
             </div>
           </div>
 
-          <div className="lg:pl-6 xl:pl-10">
+          <div className="max-w-[40rem]">
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#64748B]">Mockup 11: Slate Flow System</p>
-            <h1 className="mt-6 max-w-lg font-manrope text-[2.4rem] font-extrabold leading-[1.04] tracking-[-0.028em] text-[#1C1F5E] sm:text-[3rem] lg:text-[3.5rem]">
+            <h1 className="mt-6 max-w-[38rem] font-manrope text-[2.15rem] font-extrabold leading-[1.07] tracking-[-0.024em] text-[#1C1F5E] sm:text-[2.65rem] lg:text-[3.1rem]">
               Finance in Focus for teams that plan in motion.
             </h1>
-            <p className="mt-7 max-w-md text-base leading-relaxed text-[#64748B]">
+            <p className="mt-7 max-w-[36rem] text-[1.02rem] leading-relaxed text-[#64748B]">
               Africa&apos;s leading financial planning solution. Trusted by global enterprises across Africa, Europe,
               the Middle East, and North America.
             </p>
@@ -268,23 +236,76 @@ export default function Page11() {
         </div>
       </section>
 
-      <footer className="border-t border-[#e2e8f0] bg-[#F8FAFC] px-6 pb-10 pt-12 sm:px-10 xl:px-14">
+      <footer className="border-t border-[#e2e8f0] bg-[#F8FAFC] px-6 pb-10 pt-14 sm:px-10 xl:px-14">
         <div className="mx-auto max-w-[92rem]">
-          <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="flex flex-col gap-6 border-b border-[#e2e8f0] pb-10 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <IDULogoMark className="h-8 w-auto text-[#1C1F5E]" />
               <p className="mt-3 max-w-md text-sm leading-relaxed text-[#64748B]">
                 Finance in Focus for teams that want strategic planning to feel clear, fast, and controlled.
               </p>
             </div>
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href="#"
+                className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                style={{ backgroundColor: palette.primary }}
+              >
+                Partner with IDU
+                <ArrowUpRight size={14} weight="bold" />
+              </a>
+            </div>
+          </div>
+
+          <nav className="grid grid-cols-2 gap-x-8 gap-y-10 pb-10 pt-10 md:grid-cols-4" aria-label="Site map">
+            {footerTopGroups.map((item) => (
+              <div key={item.label}>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#1C1F5E]">{item.label}</p>
+                <ul className="mt-4 space-y-4">
+                  {item.groups.map((group) => (
+                    <li key={group.title}>
+                      <p className="mb-1.5 text-[11px] uppercase tracking-[0.16em] text-[#64748B]">{group.title}</p>
+                      <ul className="space-y-1.5">
+                        {group.links.map((link) => (
+                          <li key={link.label}>
+                            <Link href={link.href ?? '#'} className="text-sm text-[#334155] transition-colors hover:text-[#1C1F5E]">
+                              {link.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </nav>
+
+          {solutionsItem && (
+            <section className="border-t border-[#e2e8f0] pb-10 pt-8">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#1C1F5E]">{solutionsItem.label}</p>
+              <div className="mt-4 flex flex-wrap gap-2.5">
+                {solutionsLinks.map((link) => (
+                  <Link
+                    key={link.label}
+                    href={link.href ?? '#'}
+                    className="rounded-full border border-[#e2e8f0] bg-white px-3.5 py-1.5 text-sm text-[#334155] transition-colors hover:border-[#c5d0e8] hover:text-[#1C1F5E]"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
+
+          <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[#e2e8f0] pt-6">
+            <p className="text-xs text-[#64748B]">© {new Date().getFullYear()} IDU. All rights reserved.</p>
             <div className="flex items-center gap-6 text-sm text-[#64748B]">
               <a href="#" className="transition-colors hover:text-[#1C1F5E]">Privacy</a>
               <a href="#" className="transition-colors hover:text-[#1C1F5E]">Terms</a>
               <a href="#" className="transition-colors hover:text-[#1C1F5E]">Security</a>
             </div>
           </div>
-
-          <div className="mt-8 border-t border-[#e2e8f0] pt-6 text-xs text-[#64748B]">© {new Date().getFullYear()} IDU. All rights reserved.</div>
         </div>
       </footer>
     </main>
