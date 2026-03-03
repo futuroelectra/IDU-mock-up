@@ -21,7 +21,12 @@ type RibbonParticle = {
 }
 
 const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value))
-const CURSOR_FORCE = 0.3
+
+type AnimationDepartmentFlowsSlateProps = {
+  tone?: 'blue' | 'white' | 'dark'
+  cursorForce?: number
+  trackGlobalPointer?: boolean
+}
 
 function makeLanes(): Lane[] {
   return [
@@ -46,7 +51,11 @@ function makeParticles(count: number, laneCount: number): RibbonParticle[] {
   }))
 }
 
-export default function AnimationDepartmentFlowsSlate() {
+export default function AnimationDepartmentFlowsSlate({
+  tone = 'blue',
+  cursorForce = 0.3,
+  trackGlobalPointer = false,
+}: AnimationDepartmentFlowsSlateProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
 
@@ -108,10 +117,16 @@ export default function AnimationDepartmentFlowsSlate() {
     }
 
     const onPointerMove = (event: PointerEvent) => {
-      const rect = wrapper.getBoundingClientRect()
       pointer.active = true
-      pointer.x = event.clientX - rect.left
-      pointer.y = event.clientY - rect.top
+      if (trackGlobalPointer) {
+        const rect = wrapper.getBoundingClientRect()
+        pointer.x = event.clientX - rect.left
+        pointer.y = event.clientY - rect.top
+      } else {
+        const rect = wrapper.getBoundingClientRect()
+        pointer.x = event.clientX - rect.left
+        pointer.y = event.clientY - rect.top
+      }
     }
 
     const onPointerEnter = (event: PointerEvent) => {
@@ -146,7 +161,7 @@ export default function AnimationDepartmentFlowsSlate() {
           const t = i / 84
           const point = lanePoint(lane, t, time)
           const influence = clamp(1 - Math.hypot(point.x - pointer.smoothX, point.y - pointer.smoothY) / 224, 0, 1)
-          const warp = influence * CURSOR_FORCE * (8 + pointerSpeed * 22)
+          const warp = influence * cursorForce * (8 + pointerSpeed * 22)
           const warpedY = point.y + Math.sin((t + time * 0.2 + lane.phase) * Math.PI * 6) * warp * 0.17
           if (i === 0) {
             context.moveTo(point.x, warpedY)
@@ -154,8 +169,34 @@ export default function AnimationDepartmentFlowsSlate() {
             context.lineTo(point.x, warpedY)
           }
         }
-        context.strokeStyle = `rgba(59, 130, 246, ${0.14 + laneIndex * 0.06})`
-        context.lineWidth = 1.35
+        if (tone === 'white') {
+          const alpha = 0.24 + laneIndex * 0.06
+          context.strokeStyle = `rgba(15,23,42,${alpha * 0.18})`
+          context.lineWidth = 2.4
+          context.stroke()
+          context.beginPath()
+          for (let i = 0; i <= 84; i += 1) {
+            const t = i / 84
+            const point = lanePoint(lane, t, time)
+            const influence = clamp(1 - Math.hypot(point.x - pointer.smoothX, point.y - pointer.smoothY) / 224, 0, 1)
+            const warp = influence * cursorForce * (8 + pointerSpeed * 22)
+            const warpedY = point.y + Math.sin((t + time * 0.2 + lane.phase) * Math.PI * 6) * warp * 0.17
+            if (i === 0) {
+              context.moveTo(point.x, warpedY)
+            } else {
+              context.lineTo(point.x, warpedY)
+            }
+          }
+          context.strokeStyle = `rgba(255,255,255,${alpha})`
+          context.lineWidth = 1.25
+        } else if (tone === 'dark') {
+          const alpha = 0.28 + laneIndex * 0.08
+          context.strokeStyle = `rgba(255,255,255,${alpha})`
+          context.lineWidth = 1.35
+        } else {
+          context.strokeStyle = `rgba(59, 130, 246, ${0.14 + laneIndex * 0.06})`
+          context.lineWidth = 1.35
+        }
         context.stroke()
       })
 
@@ -179,17 +220,17 @@ export default function AnimationDepartmentFlowsSlate() {
         const influence = clamp(1 - distance / 196, 0, 1)
 
         if (influence > 0) {
-          const attract = (0.09 + pointerSpeed * 0.66) * influence * CURSOR_FORCE
+          const attract = (0.09 + pointerSpeed * 0.66) * influence * cursorForce
           particle.vx += dx * attract * 0.0068
           particle.vy += dy * attract * 0.0068
 
-          const swirl = (0.13 + pointerSpeed * 0.92) * influence * CURSOR_FORCE
+          const swirl = (0.13 + pointerSpeed * 0.92) * influence * cursorForce
           particle.vx += -dy * swirl * 0.0054
           particle.vy += dx * swirl * 0.0054
         }
 
         if (distance < 92) {
-          const repel = (1 - distance / 92) * (0.27 + particle.size * 0.034) * CURSOR_FORCE
+          const repel = (1 - distance / 92) * (0.27 + particle.size * 0.034) * cursorForce
           const inv = 1 / (distance + 0.0001)
           particle.vx -= dx * inv * repel
           particle.vy -= dy * inv * repel
@@ -204,36 +245,72 @@ export default function AnimationDepartmentFlowsSlate() {
         const y = base.y + particle.offsetY
         const radius = particle.size
 
+        const glow = context.createRadialGradient(x, y, 0, x, y, radius * 2.1)
+        if (tone === 'white') {
+          glow.addColorStop(0, 'rgba(255,255,255,0.56)')
+          glow.addColorStop(1, 'rgba(255,255,255,0)')
+        } else if (tone === 'dark') {
+          glow.addColorStop(0, 'rgba(186,230,253,0.24)')
+          glow.addColorStop(0.6, 'rgba(224,242,254,0.12)')
+          glow.addColorStop(1, 'rgba(255,255,255,0)')
+        } else {
+          glow.addColorStop(0, 'rgba(96,165,250,0.28)')
+          glow.addColorStop(1, 'rgba(96,165,250,0)')
+        }
         context.beginPath()
-        context.fillStyle = `rgba(37, 99, 235, ${0.12 + radius * 0.012})`
-        context.ellipse(x + radius * 0.26, y + radius * 0.46, radius * 0.88, radius * 0.56, 0, 0, Math.PI * 2)
+        context.fillStyle = glow
+        context.arc(x, y, radius * 2.1, 0, Math.PI * 2)
         context.fill()
 
-        const pearl = context.createRadialGradient(x - radius * 0.36, y - radius * 0.38, 0, x, y, radius * 1.2)
-        pearl.addColorStop(0, 'rgba(255,255,255,0.99)')
-        pearl.addColorStop(0.33, 'rgba(241,248,255,0.97)')
-        pearl.addColorStop(0.72, 'rgba(200,224,255,0.9)')
-        pearl.addColorStop(1, 'rgba(138,180,242,0.82)')
+        const pearl = context.createRadialGradient(x - radius * 0.34, y - radius * 0.36, 0, x, y, radius * 1.25)
+        if (tone === 'white') {
+          pearl.addColorStop(0, 'rgba(255,255,255,1)')
+          pearl.addColorStop(0.45, 'rgba(255,255,255,0.98)')
+          pearl.addColorStop(1, 'rgba(255,255,255,0.92)')
+        } else if (tone === 'dark') {
+          pearl.addColorStop(0, 'rgba(223,232,252,0.78)')
+          pearl.addColorStop(0.5, 'rgba(170,189,230,0.66)')
+          pearl.addColorStop(1, 'rgba(126,146,198,0.58)')
+        } else {
+          pearl.addColorStop(0, 'rgba(255,255,255,0.99)')
+          pearl.addColorStop(0.35, 'rgba(232,243,255,0.97)')
+          pearl.addColorStop(0.74, 'rgba(173,212,255,0.92)')
+          pearl.addColorStop(1, 'rgba(95,165,245,0.85)')
+        }
 
         context.beginPath()
         context.fillStyle = pearl
         context.arc(x, y, radius, 0, Math.PI * 2)
         context.fill()
 
-        if ((particle.laneIndex + Math.floor(time * 2)) % 5 === 0) {
-          const accentGlow = context.createRadialGradient(x, y, 0, x, y, radius * 1.9)
-          accentGlow.addColorStop(0, 'rgba(255,77,0,0.12)')
-          accentGlow.addColorStop(1, 'rgba(255,77,0,0)')
+        if (tone === 'dark') {
+          const texture = context.createRadialGradient(x + radius * 0.2, y + radius * 0.2, radius * 0.15, x, y, radius * 1.1)
+          texture.addColorStop(0, 'rgba(81,99,148,0.18)')
+          texture.addColorStop(1, 'rgba(26,36,75,0.28)')
           context.beginPath()
-          context.fillStyle = accentGlow
-          context.arc(x, y, radius * 1.9, 0, Math.PI * 2)
+          context.fillStyle = texture
+          context.arc(x, y, radius, 0, Math.PI * 2)
+          context.fill()
+        }
+
+        if (tone === 'white') {
+          context.beginPath()
+          context.fillStyle = 'rgba(15,23,42,0.17)'
+          context.arc(x, y, radius + 1.3, 0, Math.PI * 2)
           context.fill()
 
           context.beginPath()
-          context.fillStyle = 'rgba(255,77,0,0.16)'
-          context.arc(x - radius * 0.18, y - radius * 0.22, Math.max(1.1, radius * 0.2), 0, Math.PI * 2)
+          context.fillStyle = 'rgba(255,255,255,1)'
+          context.arc(x, y, radius, 0, Math.PI * 2)
           context.fill()
         }
+
+        context.beginPath()
+        context.strokeStyle =
+          tone === 'white' ? 'rgba(255,255,255,0.88)' : tone === 'dark' ? 'rgba(219,233,255,0.5)' : 'rgba(255,255,255,0.7)'
+        context.lineWidth = 1
+        context.arc(x, y, radius, 0, Math.PI * 2)
+        context.stroke()
       })
 
       const edge = clamp(Math.min(width, height) * 0.21, 52, 150)
@@ -265,18 +342,30 @@ export default function AnimationDepartmentFlowsSlate() {
     const resizeObserver = new ResizeObserver(resize)
     resizeObserver.observe(wrapper)
 
-    wrapper.addEventListener('pointermove', onPointerMove)
-    wrapper.addEventListener('pointerenter', onPointerEnter)
-    wrapper.addEventListener('pointerleave', onPointerLeave)
+    if (trackGlobalPointer) {
+      window.addEventListener('pointermove', onPointerMove, { passive: true })
+      window.addEventListener('pointerleave', onPointerLeave)
+      window.addEventListener('pointerdown', onPointerMove, { passive: true })
+    } else {
+      wrapper.addEventListener('pointermove', onPointerMove)
+      wrapper.addEventListener('pointerenter', onPointerEnter)
+      wrapper.addEventListener('pointerleave', onPointerLeave)
+    }
 
     return () => {
       window.cancelAnimationFrame(frame)
       resizeObserver.disconnect()
-      wrapper.removeEventListener('pointermove', onPointerMove)
-      wrapper.removeEventListener('pointerenter', onPointerEnter)
-      wrapper.removeEventListener('pointerleave', onPointerLeave)
+      if (trackGlobalPointer) {
+        window.removeEventListener('pointermove', onPointerMove)
+        window.removeEventListener('pointerleave', onPointerLeave)
+        window.removeEventListener('pointerdown', onPointerMove)
+      } else {
+        wrapper.removeEventListener('pointermove', onPointerMove)
+        wrapper.removeEventListener('pointerenter', onPointerEnter)
+        wrapper.removeEventListener('pointerleave', onPointerLeave)
+      }
     }
-  }, [])
+  }, [tone, cursorForce, trackGlobalPointer])
 
   return (
     <div ref={wrapperRef} className="relative h-full w-full">

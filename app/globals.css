@@ -68,3 +68,100 @@
 .animate-button-glow {
   animation: button-glow 2.5s ease-in-out infinite;
 }
+
+@keyframes logo-belt {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes logo-belt-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.logo-belt-track {
+  animation: logo-belt 28s linear infinite;
+}
+
+.logo-belt-track-reverse {
+  animation: logo-belt-reverse 26s linear infinite;
+}
+
+.logo-belt-shell {
+  overflow: hidden;
+}
+
+.logo-belt-set {
+  display: flex;
+  width: max-content;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 3.5rem;
+  padding-right: 3.5rem;
+}
+
+.logo-belt-track-forward,
+.logo-belt-track-reverse {
+  display: flex;
+  width: max-content;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+.logo-belt-track-forward {
+  animation: logo-belt 60s linear infinite;
+}
+
+.logo-belt-track-reverse {
+  animation: logo-belt-reverse 60s linear infinite;
+}
+
+.logo-wordmark,
+.logo-mark {
+  filter: grayscale(1);
+}
+
+.logo-wordmark {
+  opacity: 0.74;
+  text-shadow: 0 1px 8px rgba(15, 23, 42, 0.08);
+}
+
+@keyframes outcome-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.outcome-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: outcome-marquee 44s linear infinite;
+  will-change: transform;
+}
+
+.outcome-marquee-set {
+  display: flex;
+  width: max-content;
+  gap: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-belt-track,
+  .logo-belt-track-reverse,
+  .outcome-marquee-track {
+    animation: none;
+    transform: translateX(0);
+  }
+}

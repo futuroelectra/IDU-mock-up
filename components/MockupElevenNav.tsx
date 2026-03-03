@@ -8,16 +8,16 @@ import { megaMenuData } from './navMenuData'
 
 export default function MockupElevenNav() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
-  const menuItems = [...megaMenuData].reverse()
+  const menuItems = megaMenuData
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6" onMouseLeave={() => setOpenIndex(null)}>
-      <nav className="mx-auto flex h-16 w-full max-w-[92rem] items-center rounded-full border border-[#e2e8f0] bg-white/88 px-3 backdrop-blur-xl">
-        <Link href="/" className="ml-2 flex items-center text-[#1C1F5E]">
+      <nav className="mx-auto grid h-16 w-full max-w-[92rem] grid-cols-[1fr_auto_1fr] items-center rounded-full border border-[#d9e2f3] bg-white/86 px-3 shadow-[0_18px_40px_-34px_rgba(15,23,42,0.45)] backdrop-blur-xl">
+        <Link href="/" className="ml-2 flex items-center justify-self-start text-[#1C1F5E]">
           <IDULogoMark className="h-7 w-auto" />
         </Link>
 
-        <div className="relative mx-auto hidden items-center gap-1 lg:flex">
+        <div className="relative hidden items-center justify-self-center gap-1 lg:flex">
           {menuItems.map((item, index) => {
             const isOpen = openIndex === index
             return (
@@ -31,9 +31,9 @@ export default function MockupElevenNav() {
                 </button>
 
                 {isOpen && (
-                  <div className="absolute left-1/2 top-full w-[min(96vw,1120px)] -translate-x-1/2 pt-3">
-                    <div className="max-h-[68vh] overflow-auto rounded-3xl border border-[#dce6f6] bg-white p-4 shadow-[0_24px_60px_-42px_rgba(15,23,42,0.38)]">
-                      <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                  <div className="absolute left-1/2 top-full -translate-x-1/2 pt-3">
+                    <div className="max-h-[70vh] max-w-[94vw] overflow-auto rounded-3xl border border-[#dce6f6] bg-white p-5 shadow-[0_28px_70px_-44px_rgba(15,23,42,0.4)]">
+                      <div className="grid w-max grid-flow-col auto-cols-[minmax(14rem,max-content)] gap-3">
                         {item.groups.map((group) => (
                           <div key={group.title} className="rounded-2xl border border-[#e5ecf7] bg-[#f8fafc] p-4">
                             <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#64748B]">{group.title}</p>
@@ -60,15 +60,9 @@ export default function MockupElevenNav() {
           })}
         </div>
 
-        <div className="ml-auto flex items-center gap-2 pr-1">
+        <div className="flex items-center justify-self-end pr-1">
           <Link
-            href="/4"
-            className="hidden rounded-full border border-[#d5dcec] px-4 py-2 text-sm font-medium text-[#1C1F5E] transition-colors hover:bg-[#f1f4fa] sm:inline-flex"
-          >
-            Mockup 4
-          </Link>
-          <Link
-            href="#"
+            href="/demo"
             className="inline-flex items-center gap-1.5 rounded-full bg-[#1C1F5E] px-4 py-2 text-sm font-semibold text-white transition-colors hover:opacity-95"
           >
             Book a Demo

@@ -168,7 +168,7 @@ export default function WhiteSection() {
 
           {/* Sitemap: clear columns */}
           <nav className="grid grid-cols-2 md:grid-cols-5 gap-x-8 gap-y-10 pt-10 pb-10" aria-label="Site map">
-            {[...megaMenuData].reverse().map((item) => (
+            {megaMenuData.map((item) => (
               <div key={item.label}>
                 <p className="font-panchang font-bold text-xs uppercase tracking-wider text-gray-900 mb-4">
                   {item.label}

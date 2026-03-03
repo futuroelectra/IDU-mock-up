@@ -7,28 +7,59 @@ export type MegaMenuItem = {
 
 export const megaMenuData: MegaMenuItem[] = [
   {
-    label: 'Company',
+    label: 'Solutions',
     groups: [
       {
-        title: 'Our Identity',
+        title: 'Budgeting & Forecasting',
         links: [
-          { label: 'Our Vision', href: '#' },
-          { label: 'The IDU Team', href: '#' },
-          { label: 'Global Partner Network', href: '#' },
-          { label: 'Careers', href: '#' },
+          { label: 'Overview', href: '/solutions/budgeting-and-forecasting' },
+          { label: 'Capex Planning', href: '/solutions/budgeting-and-forecasting/capex-planning' },
+          { label: 'Cash Flow Planning', href: '/solutions/budgeting-and-forecasting/cash-flow-planning' },
+          { label: 'Project Planning', href: '/solutions/budgeting-and-forecasting/project-planning' },
+          { label: 'Workforce Planning', href: '/solutions/budgeting-and-forecasting/workforce-planning' },
+          { label: 'Modelling & Scenario Planning', href: '/solutions/budgeting-and-forecasting/modelling-and-scenario-planning' },
         ],
+      },
+      {
+        title: 'Intelligence & Reporting',
+        links: [
+          { label: 'Overview', href: '/solutions/intelligence-and-reporting' },
+          { label: 'Analytics & Reporting', href: '/solutions/intelligence-and-reporting/analytics-and-reporting' },
+          { label: 'Dashboards', href: '/solutions/intelligence-and-reporting/dashboards' },
+        ],
+      },
+      {
+        title: 'Sales & Operational Planning',
+        links: [
+          { label: 'Overview', href: '/solutions/sales-and-operational-planning' },
+          { label: 'Planning', href: '/solutions/sales-and-operational-planning/planning' },
+          { label: 'Reporting', href: '/solutions/sales-and-operational-planning/reporting' },
+        ],
+      },
+      {
+        title: 'Fixed Asset Management',
+        links: [{ label: 'Overview', href: '/solutions/fixed-asset-management' }],
       },
     ],
   },
   {
-    label: 'Knowledge Center',
+    label: 'Platform',
     groups: [
       {
-        title: 'Resource Center',
+        title: 'Platform',
         links: [
-          { label: 'Financial Literacy Hub', href: '#' },
-          { label: 'EPM Trends and Digital Guides', href: '#' },
-          { label: 'Global Webinars', href: '#' },
+          { label: 'How It Works', href: '/platform/how-it-works' },
+          { label: 'AI Capabilities', href: '/platform/ai-capabilities' },
+          { label: 'Integrations', href: '/platform/integrations' },
+          { label: 'Deployment & Security', href: '/platform/deployment-and-security' },
+          { label: 'Pricing & FAQs', href: '/platform/pricing-and-faqs' },
+        ],
+      },
+      {
+        title: 'By Role',
+        links: [
+          { label: 'For Finance Leaders', href: '/platform/for-finance-leaders' },
+          { label: 'For Operational Managers', href: '/platform/for-operational-managers' },
         ],
       },
     ],
@@ -37,67 +68,38 @@ export const megaMenuData: MegaMenuItem[] = [
     label: 'Global Success',
     groups: [
       {
-        title: 'Social Proof',
+        title: 'Global Success',
         links: [
-          { label: 'Industry Expertise', href: '#' },
-          { label: 'Enterprise Case Studies', href: '#' },
-          { label: 'Global Ratings and Reviews', href: '#' },
+          { label: 'Industry Expertise', href: '/global-success/industry-expertise' },
+          { label: 'Case Studies', href: '/global-success/case-studies' },
+          { label: 'Reviews', href: '/global-success/reviews' },
         ],
       },
     ],
   },
   {
-    label: 'Platform',
+    label: 'Resources',
     groups: [
       {
-        title: 'The Architecture',
+        title: 'Resources',
         links: [
-          { label: 'Cloud Architecture', href: '#' },
-          { label: 'Security and Compliance', href: '#' },
-          { label: 'Integration Ecosystem', href: '#' },
-          { label: 'Pricing and FAQs', href: '#' },
+          { label: 'Blog', href: '/learn/blog' },
+          { label: 'Webinars', href: '/learn/webinars' },
+          { label: 'Guides', href: '/learn/guides' },
         ],
       },
     ],
   },
   {
-    label: 'Solutions',
+    label: 'Company',
     groups: [
       {
-        title: 'By Role',
+        title: 'Company',
         links: [
-          { label: 'The Strategic CFO: Governance and Risk', href: '#' },
-          { label: 'The Operational Manager: Ownership and Literacy', href: '#' },
+          { label: 'Vision', href: '/company/vision' },
+          { label: 'Partners', href: '/company/partners' },
+          { label: 'Contact', href: '/company/contact' },
         ],
-      },
-      {
-        title: 'Budgeting and Adaptive Forecasting',
-        links: [
-          { label: 'Budgeting and Forecasting', href: '#' },
-          { label: 'Modelling and Scenario Planning', href: '#' },
-          { label: 'Capex Planning', href: '#' },
-          { label: 'Cash Flow Planning', href: '#' },
-          { label: 'Project Planning', href: '#' },
-          { label: 'Workforce Planning', href: '#' },
-        ],
-      },
-      {
-        title: 'Financial Intelligence and Reporting',
-        links: [
-          { label: 'Analytics and Reporting', href: '#' },
-          { label: 'Dashboards', href: '#' },
-        ],
-      },
-      {
-        title: 'Unified Sales and Operational Planning',
-        links: [
-          { label: 'Sales and Operational Planning', href: '#' },
-          { label: 'Sales and Operational Reporting', href: '#' },
-        ],
-      },
-      {
-        title: 'Fixed Asset Management',
-        links: [{ label: 'Fixed Asset Management', href: '#' }],
       },
     ],
   },
